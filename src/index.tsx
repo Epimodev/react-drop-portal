@@ -20,7 +20,7 @@ interface Props {
     exit?: CSSProperties;
     exitActive?: CSSProperties;
   };
-  timeout: number | { enter: number; exit: number };
+  timeout?: number | { enter: number; exit: number };
 }
 
 interface State {
@@ -32,6 +32,7 @@ class DropPortal extends Component<Props, State> {
 
   static defaultProps = {
     alignment: 'center',
+    timeout: 0,
   };
 
   constructor(props: Props) {
@@ -104,7 +105,12 @@ class DropPortal extends Component<Props, State> {
     const { children, className, classNames, timeout } = this.props;
     const { childStyle } = this.state;
     return (
-      <AniPortal className={className} classNames={classNames} style={childStyle} timeout={timeout}>
+      <AniPortal
+        className={className}
+        classNames={classNames}
+        style={childStyle}
+        timeout={timeout!}
+      >
         <div ref={this.setChildContainer}>{children}</div>
       </AniPortal>
     );

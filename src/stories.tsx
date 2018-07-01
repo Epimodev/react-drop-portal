@@ -64,7 +64,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean }> {
     const { opened } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
-      <div style={{ textAlign: 'center' }}>
+      <div>
         <button ref={this.setButton} onClick={this.toogleDropdown} className={buttonClassName}>
           {buttonLabel}
         </button>
