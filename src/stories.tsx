@@ -11,11 +11,41 @@ const dropdownClassNames = {
   exitActive: 'dropdown-example_exit-active',
 };
 
-storiesOf('DropPortal', module).add('default', () => <DropdownExample />);
+storiesOf('DropPortal/Top Left', module)
+  .add('left', () => <DropdownExample buttonClassName="button_top-left" alignment="left" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-left" alignment="center" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-left" alignment="right" />);
+storiesOf('DropPortal/Top Center', module)
+  .add('left', () => <DropdownExample buttonClassName="button_top-center" alignment="left" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-center" alignment="center" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-center" alignment="right" />);
+storiesOf('DropPortal/Top Right', module)
+  .add('left', () => <DropdownExample buttonClassName="button_top-right" alignment="left" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-right" alignment="center" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-right" alignment="right" />);
+storiesOf('DropPortal/Bottom Left', module)
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-left" alignment="left" />)
+  .add('center', () => <DropdownExample buttonClassName="button_bottom-left" alignment="center" />)
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-left" alignment="right" />);
+storiesOf('DropPortal/Bottom Center', module)
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-center" alignment="left" />)
+  .add('center', () => (
+    <DropdownExample buttonClassName="button_bottom-center" alignment="center" />
+  ))
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-center" alignment="right" />);
+storiesOf('DropPortal/Bottom Right', module)
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-right" alignment="left" />)
+  .add('center', () => <DropdownExample buttonClassName="button_bottom-right" alignment="center" />)
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-right" alignment="right" />);
 
-class DropdownExample extends Component<{}, { opened: boolean }> {
+interface ExampleProps {
+  buttonClassName: string;
+  alignment: 'left' | 'center' | 'right';
+}
+
+class DropdownExample extends Component<ExampleProps, { opened: boolean }> {
   button: HTMLButtonElement | null = null;
-  constructor(props: {}) {
+  constructor(props: ExampleProps) {
     super(props);
     this.state = { opened: false };
     this.setButton = this.setButton.bind(this);
@@ -30,17 +60,19 @@ class DropdownExample extends Component<{}, { opened: boolean }> {
     }));
   }
   render() {
+    const { buttonClassName, alignment } = this.props;
     const { opened } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
-      <div>
-        <button ref={this.setButton} onClick={this.toogleDropdown}>
+      <div style={{ textAlign: 'center' }}>
+        <button ref={this.setButton} onClick={this.toogleDropdown} className={buttonClassName}>
           {buttonLabel}
         </button>
         {opened &&
           this.button && (
             <DropPortal
               target={this.button}
+              alignment={alignment}
               className={dropdownClassName}
               classNames={dropdownClassNames}
               timeout={300}

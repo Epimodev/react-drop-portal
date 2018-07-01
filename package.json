@@ -50,6 +50,6 @@
     }
   },
   "dependencies": {
-    "react-aniportal": "^0.1.0"
+    "react-aniportal": "^0.1.2"
   }
 }

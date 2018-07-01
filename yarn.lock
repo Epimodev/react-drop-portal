@@ -4839,12 +4839,11 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-aniportal@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.1.0.tgz#6d7ac2bf0003a519d97f08abbda5c52033b2a57b"
+react-aniportal@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.1.2.tgz#5de769ac3e58038cceb60661a0d88b4d8c07be18"
   dependencies:
     classnames "^2.2.6"
-    lodash "^4.17.10"
 
 react-dev-utils@^5.0.0:
   version "5.0.1"
