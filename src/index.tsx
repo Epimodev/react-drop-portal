@@ -40,18 +40,28 @@ class DropPortal extends Component<Props, State> {
     this.state = {};
 
     this.setChildContainer = this.setChildContainer.bind(this);
+    this.updatePositionStyle = this.updatePositionStyle.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('resize', this.updatePositionStyle);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updatePositionStyle);
   }
 
   setChildContainer(ref: HTMLDivElement | null) {
     this.childContainer = ref;
-    if (this.childContainer !== null) {
-      // init position here instead of in `componentDidMount`
-      // because `componentDidMount` is call before
-      this.updatePositionStyle();
-    }
+    // init position here instead of in `componentDidMount`
+    // because `componentDidMount` is call before
+    this.updatePositionStyle();
   }
 
   updatePositionStyle() {
+    if (this.childContainer === null) {
+      return;
+    }
     const { alignment, target } = this.props;
     const {
       top: targetTop,
@@ -61,8 +71,8 @@ class DropPortal extends Component<Props, State> {
     } = target.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
-    const childrenWidth = this.childContainer!.offsetWidth;
-    const childrenHeight = this.childContainer!.offsetHeight;
+    const childrenWidth = this.childContainer.offsetWidth;
+    const childrenHeight = this.childContainer.offsetHeight;
 
     const verticalMeasure = computeVerticalMeasure({
       windowHeight,
