@@ -1,0 +1,55 @@
+{
+  "name": "react-drop-portal",
+  "version": "0.1.0",
+  "description": "A react component which render a portal located near a target element",
+  "author": "Frederic Godin",
+  "repository": "Epimodev/react-drop-portal",
+  "license": "MIT",
+  "main": "module/index.js",
+  "module": "module/index.js",
+  "typings": "module/index.d.ts",
+  "keywords": [
+    "react",
+    "portal",
+    "animations",
+    "typescript",
+    "tslint"
+  ],
+  "files": [
+    "src",
+    "module"
+  ],
+  "scripts": {
+    "build": "rm -rf ./module && tsc",
+    "lint": "tslint -c tslint.json 'src/**/*.ts?(x)'",
+    "check-format": "prettier --list-different 'src/**/*.ts?(x)'",
+    "storybook": "start-storybook -s ./ -p 9001 -c .storybook",
+    "prepublish": "yarn lint && yarn check-format && yarn build"
+  },
+  "devDependencies": {
+    "@storybook/react": "^3.4.8",
+    "@types/react": "^16.4.1",
+    "@types/react-dom": "^16.0.6",
+    "babel-core": "^6.26.3",
+    "husky": "^1.0.0-rc.2",
+    "prettier": "^1.13.5",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "ts-loader": "^3.5.0",
+    "tslint": "^5.10.0",
+    "tslint-config-airbnb": "^5.8.0",
+    "typescript": "^2.9.2"
+  },
+  "peer-dependencies": {
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn check-format"
+    }
+  },
+  "dependencies": {
+    "react-aniportal": "^0.1.0"
+  }
+}
