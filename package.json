@@ -50,6 +50,7 @@
     }
   },
   "dependencies": {
-    "react-aniportal": "^0.1.2"
+    "react-aniportal": "^0.1.3",
+    "tslib": "^1.9.3"
   }
 }
