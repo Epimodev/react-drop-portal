@@ -102,7 +102,7 @@ class DropPortal extends Component<Props, State> {
   }
 
   render() {
-    const { children, className, classNames, style, timeout } = this.props;
+    const { children, className, classNames, style, styles, timeout } = this.props;
     const { childStyle } = this.state;
     const portalStyle = { ...childStyle, ...style };
     return (
@@ -110,6 +110,7 @@ class DropPortal extends Component<Props, State> {
         className={className}
         classNames={classNames}
         style={portalStyle}
+        styles={styles}
         timeout={timeout!}
       >
         <div ref={this.setChildContainer}>{children}</div>
