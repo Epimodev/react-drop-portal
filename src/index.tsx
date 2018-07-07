@@ -25,6 +25,8 @@ interface Props {
 
 interface State {
   childStyle?: CSSProperties;
+  childrenWidth: number;
+  childrenHeight: number;
 }
 
 class DropPortal extends Component<Props, State> {
@@ -38,9 +40,13 @@ class DropPortal extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      childrenWidth: 0,
+      childrenHeight: 0,
+    };
 
     this.setChildContainer = this.setChildContainer.bind(this);
+    this.portalDidUpdate = this.portalDidUpdate.bind(this);
     this.updatePositionStyle = this.updatePositionStyle.bind(this);
   }
 
@@ -55,8 +61,19 @@ class DropPortal extends Component<Props, State> {
   setChildContainer(ref: HTMLDivElement | null) {
     this.childContainer = ref;
     // init position here instead of in `componentDidMount`
-    // because `componentDidMount` is call before
+    // because `componentDidMount` is call before portal finish render
     this.updatePositionStyle();
+  }
+
+  portalDidUpdate() {
+    if (this.childContainer) {
+      const { childrenWidth, childrenHeight } = this.state;
+      const newChildrenWidth = this.childContainer.offsetWidth;
+      const newChildrenHeight = this.childContainer.offsetHeight;
+      if (newChildrenWidth !== childrenWidth || newChildrenHeight !== childrenHeight) {
+        this.updatePositionStyle();
+      }
+    }
   }
 
   updatePositionStyle() {
@@ -97,6 +114,8 @@ class DropPortal extends Component<Props, State> {
     };
 
     this.setState({
+      childrenWidth,
+      childrenHeight,
       childStyle: style,
     });
   }
@@ -112,6 +131,7 @@ class DropPortal extends Component<Props, State> {
         style={portalStyle}
         styles={styles}
         timeout={timeout!}
+        portalDidUpdate={this.portalDidUpdate}
       >
         <div ref={this.setChildContainer}>{children}</div>
       </AniPortal>

@@ -43,31 +43,41 @@ interface ExampleProps {
   alignment: 'left' | 'center' | 'right';
 }
 
-class DropdownExample extends Component<ExampleProps, { opened: boolean }> {
+const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
+const CHOICES_2 = ['Choice 4', 'Choice 5'];
+
+class DropdownExample extends Component<ExampleProps, { opened: boolean; choices: string[] }> {
   button: HTMLButtonElement | null = null;
   constructor(props: ExampleProps) {
     super(props);
-    this.state = { opened: false };
+    this.state = { opened: false, choices: CHOICES_1 };
     this.setButton = this.setButton.bind(this);
     this.toogleDropdown = this.toogleDropdown.bind(this);
+    this.toogleChoices = this.toogleChoices.bind(this);
   }
   setButton(ref: HTMLButtonElement | null) {
     this.button = ref;
   }
   toogleDropdown() {
-    this.setState(state => ({
-      opened: !state.opened,
+    this.setState(({ opened }) => ({
+      opened: !opened,
+    }));
+  }
+  toogleChoices() {
+    this.setState(({ choices }) => ({
+      choices: choices === CHOICES_1 ? CHOICES_2 : CHOICES_1,
     }));
   }
   render() {
     const { buttonClassName, alignment } = this.props;
-    const { opened } = this.state;
+    const { opened, choices } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
       <div>
         <button ref={this.setButton} onClick={this.toogleDropdown} className={buttonClassName}>
           {buttonLabel}
         </button>
+        <button onClick={this.toogleChoices}>Change choices</button>
         {opened &&
           this.button && (
             <DropPortal
@@ -77,11 +87,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean }> {
               classNames={dropdownClassNames}
               timeout={300}
             >
-              <div>
-                <div>Choice 1</div>
-                <div>Choice 2</div>
-                <div>Choice 3</div>
-              </div>
+              <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>
             </DropPortal>
           )}
       </div>
