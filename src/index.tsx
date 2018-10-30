@@ -5,6 +5,7 @@ import { computeVerticalMeasure, computeLeftPosition } from './utils';
 interface Props {
   children: ReactElement<any>;
   target: HTMLElement;
+  position: 'top' | 'bottom';
   alignment: 'left' | 'center' | 'right';
   offset: { x: number; y: number };
   className?: string;
@@ -34,6 +35,7 @@ class DropPortal extends Component<Props, State> {
   childContainer: HTMLDivElement | null = null;
 
   static defaultProps = {
+    position: 'bottom',
     alignment: 'center',
     timeout: 0,
     offset: { x: 0, y: 0 },
@@ -82,7 +84,7 @@ class DropPortal extends Component<Props, State> {
     if (this.childContainer === null) {
       return;
     }
-    const { alignment, target, offset } = this.props;
+    const { position, alignment, target, offset } = this.props;
     const {
       top: targetTop,
       left: targetLeft,
@@ -95,6 +97,7 @@ class DropPortal extends Component<Props, State> {
     const childrenHeight = this.childContainer.offsetHeight;
 
     const verticalMeasure = computeVerticalMeasure({
+      position,
       windowHeight,
       childrenHeight,
       targetHeight,

@@ -80,10 +80,31 @@ storiesOf('DropPortal/Offset', module)
       offset={{ x: -150, y: -50 }}
     />
   ));
+storiesOf('DropPortal/Top', module)
+  .add('default', () => (
+    <DropdownExample buttonClassName="button_center-center" alignment="center" position="top" />
+  ))
+  .add('at top', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      position="top"
+      offset={{ x: 10, y: 10 }}
+    />
+  ))
+  .add('with offset', () => (
+    <DropdownExample
+      buttonClassName="button_center-center"
+      alignment="left"
+      position="top"
+      offset={{ x: 10, y: 10 }}
+    />
+  ));
 
 interface ExampleProps {
   buttonClassName: string;
   alignment: 'left' | 'center' | 'right';
+  position?: 'top' | 'bottom';
   offset?: { x: number; y: number };
 }
 
@@ -113,7 +134,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
     }));
   }
   render() {
-    const { buttonClassName, alignment, offset } = this.props;
+    const { buttonClassName, alignment, position = 'bottom', offset } = this.props;
     const { opened, choices } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
@@ -130,6 +151,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
               className={dropdownClassName}
               classNames={dropdownClassNames}
               timeout={300}
+              position={position}
               offset={offset}
             >
               <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>

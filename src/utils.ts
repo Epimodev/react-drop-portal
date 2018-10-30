@@ -1,4 +1,5 @@
 interface VerticalOptions {
+  position: 'top' | 'bottom';
   windowHeight: number;
   childrenHeight: number;
   targetHeight: number;
@@ -20,7 +21,7 @@ interface HorizontalOptions {
   offset: number;
 }
 
-export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasure {
+function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure {
   const basicTop = options.targetTop + options.targetHeight + options.offset;
   const fixedTop = Math.max(0, basicTop);
   const maxHeight = options.windowHeight - fixedTop;
@@ -50,6 +51,45 @@ export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasur
     top: fixedTop,
     height: options.childrenHeight,
   };
+}
+
+function computeTopPortalVertical(options: VerticalOptions): VerticalMeasure {
+  const topPosition = options.targetTop - options.childrenHeight + options.offset;
+  const isTopOverflow = topPosition < 0;
+
+  if (isTopOverflow) {
+    const bottomSpace = options.windowHeight - (options.targetTop + options.targetHeight);
+    const moreSpaceAtBottom = bottomSpace > options.targetTop;
+
+    if (moreSpaceAtBottom) {
+      const top = options.targetTop + options.targetHeight;
+      const maxHeight = options.windowHeight - top;
+      const bottomFreeSpace = maxHeight - options.childrenHeight;
+      const isBottomOverflow = bottomFreeSpace < 0;
+      const height = isBottomOverflow ? maxHeight : options.childrenHeight;
+      return {
+        top,
+        height,
+      };
+    }
+
+    return {
+      top: Math.max(0, topPosition),
+      height: options.targetTop,
+    };
+  }
+
+  return {
+    top: Math.max(0, topPosition),
+    height: options.childrenHeight,
+  };
+}
+
+export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasure {
+  if (options.position === 'bottom') {
+    return computeBottomPortalVertical(options);
+  }
+  return computeTopPortalVertical(options);
 }
 
 function computeChildLeftPosition(options: HorizontalOptions): number {
