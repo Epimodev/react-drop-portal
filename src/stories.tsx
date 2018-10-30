@@ -100,12 +100,36 @@ storiesOf('DropPortal/Top', module)
       offset={{ x: 10, y: 10 }}
     />
   ));
+storiesOf('DropPortal/Children function', module)
+  .add('at bottom', () => (
+    <DropdownExample buttonClassName="button_center-center" alignment="center" withChildFunction />
+  ))
+  .add('at top', () => (
+    <DropdownExample
+      buttonClassName="button_center-center"
+      alignment="center"
+      position="top"
+      withChildFunction
+    />
+  ))
+  .add('at top because of limit size', () => (
+    <DropdownExample buttonClassName="button_bottom-center" alignment="center" withChildFunction />
+  ))
+  .add('at bottom because of limit size', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      position="top"
+      withChildFunction
+    />
+  ));
 
 interface ExampleProps {
   buttonClassName: string;
   alignment: 'left' | 'center' | 'right';
   position?: 'top' | 'bottom';
   offset?: { x: number; y: number };
+  withChildFunction?: boolean;
 }
 
 const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
@@ -134,7 +158,13 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
     }));
   }
   render() {
-    const { buttonClassName, alignment, position = 'bottom', offset } = this.props;
+    const {
+      buttonClassName,
+      alignment,
+      position = 'bottom',
+      offset,
+      withChildFunction = false,
+    } = this.props;
     const { opened, choices } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
@@ -154,7 +184,16 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
               position={position}
               offset={offset}
             >
-              <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>
+              {withChildFunction ? (
+                ({ position }) => (
+                  <div>
+                    <div>{position}</div>
+                    {choices.map(choice => <div key={choice}>{choice}</div>)}
+                  </div>
+                )
+              ) : (
+                <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>
+              )}
             </DropPortal>
           )}
       </div>

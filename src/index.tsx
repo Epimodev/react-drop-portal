@@ -2,8 +2,12 @@ import { createElement, Component, ReactElement, CSSProperties } from 'react';
 import AniPortal from 'react-aniportal';
 import { computeVerticalMeasure, computeLeftPosition } from './utils';
 
+interface ChildrenProps {
+  position: 'top' | 'bottom';
+}
+
 interface Props {
-  children: ReactElement<any>;
+  children: ((props: ChildrenProps) => ReactElement<any>) | ReactElement<any>;
   target: HTMLElement;
   position: 'top' | 'bottom';
   alignment: 'left' | 'center' | 'right';
@@ -29,6 +33,7 @@ interface State {
   childStyle?: CSSProperties;
   childrenWidth: number;
   childrenHeight: number;
+  position: 'top' | 'bottom';
 }
 
 class DropPortal extends Component<Props, State> {
@@ -47,6 +52,7 @@ class DropPortal extends Component<Props, State> {
     this.state = {
       childrenWidth: 0,
       childrenHeight: 0,
+      position: props.position,
     };
 
     this.setChildContainer = this.setChildContainer.bind(this);
@@ -124,13 +130,15 @@ class DropPortal extends Component<Props, State> {
       childrenWidth,
       childrenHeight,
       childStyle: style,
+      position: verticalMeasure.position,
     });
   }
 
   render() {
     const { children, className, classNames, style, styles, timeout } = this.props;
-    const { childStyle } = this.state;
+    const { childStyle, position } = this.state;
     const portalStyle = { ...childStyle, ...style };
+
     return (
       <AniPortal
         className={className}
@@ -140,7 +148,9 @@ class DropPortal extends Component<Props, State> {
         timeout={timeout}
         portalDidUpdate={this.portalDidUpdate}
       >
-        <div ref={this.setChildContainer}>{children}</div>
+        <div ref={this.setChildContainer}>
+          {typeof children === 'function' ? children({ position }) : children}
+        </div>
       </AniPortal>
     );
   }

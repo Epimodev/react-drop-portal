@@ -10,6 +10,7 @@ interface VerticalOptions {
 interface VerticalMeasure {
   top: number;
   height: number;
+  position: 'top' | 'bottom';
 }
 
 interface HorizontalOptions {
@@ -38,18 +39,21 @@ function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure 
       return {
         height,
         top: Math.max(0, topPosition),
+        position: 'top',
       };
     }
 
     return {
       top: fixedTop,
       height: maxHeight,
+      position: 'bottom',
     };
   }
 
   return {
     top: fixedTop,
     height: options.childrenHeight,
+    position: 'bottom',
   };
 }
 
@@ -70,18 +74,21 @@ function computeTopPortalVertical(options: VerticalOptions): VerticalMeasure {
       return {
         top,
         height,
+        position: 'bottom',
       };
     }
 
     return {
       top: Math.max(0, topPosition),
       height: options.targetTop,
+      position: 'top',
     };
   }
 
   return {
     top: Math.max(0, topPosition),
     height: options.childrenHeight,
+    position: 'top',
   };
 }
 
