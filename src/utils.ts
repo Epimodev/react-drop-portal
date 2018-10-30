@@ -3,6 +3,7 @@ interface VerticalOptions {
   childrenHeight: number;
   targetHeight: number;
   targetTop: number;
+  offset: number;
 }
 
 interface VerticalMeasure {
@@ -16,11 +17,13 @@ interface HorizontalOptions {
   targetWidth: number;
   targetLeft: number;
   alignment: 'left' | 'center' | 'right';
+  offset: number;
 }
 
 export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasure {
-  const basicTop = options.targetTop + options.targetHeight;
-  const maxHeight = options.windowHeight - basicTop;
+  const basicTop = options.targetTop + options.targetHeight + options.offset;
+  const fixedTop = Math.max(0, basicTop);
+  const maxHeight = options.windowHeight - fixedTop;
   const bottomFreeSpace = maxHeight - options.childrenHeight;
   const isBottomOverflow = bottomFreeSpace < 0;
 
@@ -38,13 +41,13 @@ export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasur
     }
 
     return {
-      top: basicTop,
+      top: fixedTop,
       height: maxHeight,
     };
   }
 
   return {
-    top: basicTop,
+    top: fixedTop,
     height: options.childrenHeight,
   };
 }
@@ -52,14 +55,14 @@ export function computeVerticalMeasure(options: VerticalOptions): VerticalMeasur
 function computeChildLeftPosition(options: HorizontalOptions): number {
   switch (options.alignment) {
     case 'left': {
-      return options.targetLeft;
+      return options.targetLeft + options.offset;
     }
     case 'right': {
-      return options.targetLeft + options.targetWidth - options.childrenWidth;
+      return options.targetLeft + options.targetWidth - options.childrenWidth + options.offset;
     }
     case 'center': {
       const leftOffset = (options.childrenWidth - options.targetWidth) / 2;
-      return options.targetLeft - leftOffset;
+      return options.targetLeft - leftOffset + options.offset;
     }
   }
 }

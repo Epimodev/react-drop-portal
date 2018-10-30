@@ -5,7 +5,8 @@ import { computeVerticalMeasure, computeLeftPosition } from './utils';
 interface Props {
   children: ReactElement<any>;
   target: HTMLElement;
-  alignment?: 'left' | 'center' | 'right';
+  alignment: 'left' | 'center' | 'right';
+  offset: { x: number; y: number };
   className?: string;
   classNames?: {
     enter?: string;
@@ -20,7 +21,7 @@ interface Props {
     exit?: CSSProperties;
     exitActive?: CSSProperties;
   };
-  timeout?: number | { enter: number; exit: number };
+  timeout: number | { enter: number; exit: number };
 }
 
 interface State {
@@ -35,6 +36,7 @@ class DropPortal extends Component<Props, State> {
   static defaultProps = {
     alignment: 'center',
     timeout: 0,
+    offset: { x: 0, y: 0 },
   };
 
   constructor(props: Props) {
@@ -80,7 +82,7 @@ class DropPortal extends Component<Props, State> {
     if (this.childContainer === null) {
       return;
     }
-    const { alignment, target } = this.props;
+    const { alignment, target, offset } = this.props;
     const {
       top: targetTop,
       left: targetLeft,
@@ -97,13 +99,15 @@ class DropPortal extends Component<Props, State> {
       childrenHeight,
       targetHeight,
       targetTop,
+      offset: offset.y,
     });
     const leftPosition = computeLeftPosition({
       windowWidth,
       childrenWidth,
       targetWidth,
       targetLeft,
-      alignment: alignment!,
+      alignment,
+      offset: offset.x,
     });
 
     const style = {
@@ -130,7 +134,7 @@ class DropPortal extends Component<Props, State> {
         classNames={classNames}
         style={portalStyle}
         styles={styles}
-        timeout={timeout!}
+        timeout={timeout}
         portalDidUpdate={this.portalDidUpdate}
       >
         <div ref={this.setChildContainer}>{children}</div>

@@ -37,10 +37,54 @@ storiesOf('DropPortal/Bottom Right', module)
   .add('left', () => <DropdownExample buttonClassName="button_bottom-right" alignment="left" />)
   .add('center', () => <DropdownExample buttonClassName="button_bottom-right" alignment="center" />)
   .add('right', () => <DropdownExample buttonClassName="button_bottom-right" alignment="right" />);
+storiesOf('DropPortal/Offset', module)
+  .add('offset x', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: 50, y: 0 }}
+    />
+  ))
+  .add('offset y', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: 0, y: 50 }}
+    />
+  ))
+  .add('offset x negative', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: -50, y: 0 }}
+    />
+  ))
+  .add('offset y negative', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: 150, y: -50 }}
+    />
+  ))
+  .add('offset x + y', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: 50, y: 50 }}
+    />
+  ))
+  .add('offset x + y negative', () => (
+    <DropdownExample
+      buttonClassName="button_top-center"
+      alignment="center"
+      offset={{ x: -150, y: -50 }}
+    />
+  ));
 
 interface ExampleProps {
   buttonClassName: string;
   alignment: 'left' | 'center' | 'right';
+  offset?: { x: number; y: number };
 }
 
 const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
@@ -69,7 +113,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
     }));
   }
   render() {
-    const { buttonClassName, alignment } = this.props;
+    const { buttonClassName, alignment, offset } = this.props;
     const { opened, choices } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
     return (
@@ -86,6 +130,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
               className={dropdownClassName}
               classNames={dropdownClassNames}
               timeout={300}
+              offset={offset}
             >
               <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>
             </DropPortal>
