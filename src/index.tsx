@@ -27,6 +27,7 @@ interface Props {
     exitActive?: CSSProperties;
   };
   timeout: number | { enter: number; exit: number };
+  onClickOutside?: () => void;
 }
 
 interface State {
@@ -56,15 +57,18 @@ class DropPortal extends Component<Props, State> {
     };
 
     this.setChildContainer = this.setChildContainer.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.portalDidUpdate = this.portalDidUpdate.bind(this);
     this.updatePositionStyle = this.updatePositionStyle.bind(this);
   }
 
   componentDidMount() {
+    setTimeout(() => window.addEventListener('click', this.handleClick), 20);
     window.addEventListener('resize', this.updatePositionStyle);
   }
 
   componentWillUnmount() {
+    window.removeEventListener('click', this.handleClick);
     window.removeEventListener('resize', this.updatePositionStyle);
   }
 
@@ -73,6 +77,16 @@ class DropPortal extends Component<Props, State> {
     // init position here instead of in `componentDidMount`
     // because `componentDidMount` is call before portal finish render
     this.updatePositionStyle();
+  }
+
+  handleClick(event: MouseEvent) {
+    const { onClickOutside } = this.props;
+    if (onClickOutside && this.childContainer) {
+      const target = event.target as Element;
+      if (!this.childContainer.contains(target)) {
+        onClickOutside();
+      }
+    }
   }
 
   portalDidUpdate() {

@@ -123,6 +123,9 @@ storiesOf('DropPortal/Children function', module)
       withChildFunction
     />
   ));
+storiesOf('DropPortal/With click outside', module).add('default', () => (
+  <DropdownExample buttonClassName="button_center-center" alignment="center" withClickOutside />
+));
 
 interface ExampleProps {
   buttonClassName: string;
@@ -130,6 +133,7 @@ interface ExampleProps {
   position?: 'top' | 'bottom';
   offset?: { x: number; y: number };
   withChildFunction?: boolean;
+  withClickOutside?: boolean;
 }
 
 const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
@@ -164,6 +168,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
       position = 'bottom',
       offset,
       withChildFunction = false,
+      withClickOutside = false,
     } = this.props;
     const { opened, choices } = this.state;
     const buttonLabel = opened ? 'Close' : 'Open';
@@ -183,6 +188,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
               timeout={300}
               position={position}
               offset={offset}
+              onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
             >
               {withChildFunction ? (
                 ({ position }) => (
