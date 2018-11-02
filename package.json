@@ -1,6 +1,6 @@
 {
   "name": "react-drop-portal",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "A react component which render a portal located near a target element",
   "author": "Frederic Godin",
   "repository": "Epimodev/react-drop-portal",
