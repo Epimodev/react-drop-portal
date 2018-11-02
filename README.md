@@ -62,25 +62,54 @@ class DropdownExample extends Component {
 }
 ```
 
-## Available props
+## Documentation
 
-#### target: HTMLElement
+#### Props
+
+**target** `HTMLElement`  
 Element which define portal position. For example, it can be an `input` for autocompletion or a `button` for a dropdown
 
-#### alignment: 'left' | 'center' | 'right'
-Define how created portal element is aligned with target element
+**position** `(optional) 'top' | 'bottom'`  
+Default to 'bottom', define if portal element is above or below target
 
-#### className: string
+**alignment** `(optional) 'left' | 'center' | 'right'`  
+Default to 'center', define how created portal element is aligned with target element
+
+**offset** `(optional) { x: number, y: number }`  
+Add an offset on `x` and `y` axis for portal position
+
+**className** `(optional) string`  
 className to apply on container
 
-#### classNames: { enter?: string; enterActive?: string; exit?: string; exitActive?: string }
+**classNames** `(optional) { enter?: string; enterActive?: string; exit?: string; exitActive?: string }`  
 classNames which are applied during mount and unmount of the component
 
-#### style: CSSProperties
+**style** `(optional) CSSProperties`  
 style to apply on container
 
-#### styles: { enter?: CSSProperties; enterActive?: CSSProperties; exit?: CSSProperties; exitActive?: CSSProperties }
+**styles** `(optional) { enter?: CSSProperties; enterActive?: CSSProperties; exit?: CSSProperties; exitActive?: CSSProperties }`  
 styles which are applied during mount and unmount of the component
 
-#### timeout: number | { enter: number; exit: number }
-duration of enter and exit animations
+**timeout** `(optional) number | { enter: number; exit: number }`  
+default to 0, duration of enter and exit animations
+
+**onClickOutside** `(optional) function (): void`  
+function called when user click outside portal
+
+**children** `ReactNode | function ({ position: 'top' | 'bottom' }): ReactNode`  
+Portal content. You can use a function if you need portal position relative to the target (can be usefull to render tooltip arrow in right orientation)
+
+example :
+```jsx
+...
+<DropPortal target={this.target}>
+  {({ position }) => {
+    return (
+      <div className="tooltip">
+        <div className={position === 'top' ? 'arrow_to-bottom' : 'arrow_to-top'} />
+        <div className="tooltip-content">{content}</div>
+      </div>
+    );
+  }}
+</DropPortal>
+```
