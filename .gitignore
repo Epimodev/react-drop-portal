@@ -21,4 +21,5 @@ node_modules
 *.swp
 
 # build
+.cache
 module

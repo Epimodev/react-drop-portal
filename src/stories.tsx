@@ -194,11 +194,17 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
                 ({ position }) => (
                   <div>
                     <div>{position}</div>
-                    {choices.map(choice => <div key={choice}>{choice}</div>)}
+                    {choices.map(choice => (
+                      <div key={choice}>{choice}</div>
+                    ))}
                   </div>
                 )
               ) : (
-                <div>{choices.map(choice => <div key={choice}>{choice}</div>)}</div>
+                <div>
+                  {choices.map(choice => (
+                    <div key={choice}>{choice}</div>
+                  ))}
+                </div>
               )}
             </DropPortal>
           )}

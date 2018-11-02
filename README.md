@@ -12,7 +12,7 @@ yarn add react-drop-portal
 
 # or with npm
 
-npm install react-drop-portal
+npm install --save react-drop-portal
 ```
 
 ## Example
