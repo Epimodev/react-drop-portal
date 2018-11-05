@@ -117,7 +117,7 @@ class DropPortal extends Component<Props, State> {
     if (this.childContainer === null) {
       return;
     }
-    const { position, alignment, target, offset } = this.props;
+    const { position, alignment, target, offset, onClickOutside } = this.props;
     const {
       top: targetTop,
       left: targetLeft,
@@ -146,19 +146,28 @@ class DropPortal extends Component<Props, State> {
       offset: offset.x,
     });
 
-    const style: CSSProperties = {
-      position: 'absolute',
-      top: `${verticalMeasure.top}px`,
-      left: `${leftPosition}px`,
-      height: `${verticalMeasure.height}px`,
-    };
+    const isInScreen =
+      verticalMeasure.top + verticalMeasure.height > 0 && verticalMeasure.top < windowHeight;
 
-    this.setState({
-      childrenWidth,
-      childrenHeight,
-      childStyle: style,
-      position: verticalMeasure.position,
-    });
+    if (isInScreen) {
+      const style: CSSProperties = {
+        position: 'absolute',
+        top: `${verticalMeasure.top}px`,
+        left: `${leftPosition}px`,
+        height: `${verticalMeasure.height}px`,
+      };
+
+      this.setState({
+        childrenWidth,
+        childrenHeight,
+        childStyle: style,
+        position: verticalMeasure.position,
+      });
+    } else {
+      if (onClickOutside) {
+        onClickOutside();
+      }
+    }
   }
 
   render() {
