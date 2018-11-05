@@ -94,7 +94,7 @@ styles which are applied during mount and unmount of the component
 default to 0, duration of enter and exit animations
 
 **onClickOutside** `(optional) function (): void`  
-function called when user click outside portal
+function called when user click outside portal or when portal become outside screen
 
 **children** `ReactNode | function ({ position: 'top' | 'bottom' }): ReactNode`  
 Portal content. You can use a function if you need portal position relative to the target (can be usefull to render tooltip arrow in right orientation)
