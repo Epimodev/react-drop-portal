@@ -1,6 +1,6 @@
 import { createElement, Component, ReactElement, CSSProperties } from 'react';
 import AniPortal from 'react-aniportal';
-import { computeVerticalMeasure, computeLeftPosition } from './utils';
+import { computeVerticalMeasure, computeLeftPosition, getScrollableParents } from './utils';
 
 interface ChildrenProps {
   position: 'top' | 'bottom';
@@ -39,6 +39,7 @@ interface State {
 
 class DropPortal extends Component<Props, State> {
   childContainer: HTMLDivElement | null = null;
+  scrollableParents: HTMLElement[] = [];
 
   static defaultProps = {
     position: 'bottom',
@@ -65,11 +66,23 @@ class DropPortal extends Component<Props, State> {
   componentDidMount() {
     setTimeout(() => window.addEventListener('click', this.handleClick), 20);
     window.addEventListener('resize', this.updatePositionStyle);
+
+    this.scrollableParents = getScrollableParents(this.props.target);
+    this.scrollableParents.forEach(element => {
+      element.addEventListener('scroll', this.updatePositionStyle);
+    });
   }
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClick);
     window.removeEventListener('resize', this.updatePositionStyle);
+
+    this.scrollableParents.forEach(element => {
+      if (element) {
+        element.removeEventListener('scroll', this.updatePositionStyle);
+      }
+    });
+    this.scrollableParents = [];
   }
 
   setChildContainer(ref: HTMLDivElement | null) {
@@ -133,8 +146,8 @@ class DropPortal extends Component<Props, State> {
       offset: offset.x,
     });
 
-    const style = {
-      position: 'absolute' as 'absolute',
+    const style: CSSProperties = {
+      position: 'absolute',
       top: `${verticalMeasure.top}px`,
       left: `${leftPosition}px`,
       height: `${verticalMeasure.height}px`,

@@ -23,8 +23,9 @@ interface HorizontalOptions {
 }
 
 function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure {
-  const basicTop = options.targetTop + options.targetHeight + options.offset;
-  const fixedTop = Math.max(0, basicTop);
+  const basicTop = options.targetTop + options.targetHeight;
+  const topWithOffset = basicTop + options.offset;
+  const fixedTop = basicTop > 0 ? Math.max(0, topWithOffset) : basicTop;
   const maxHeight = options.windowHeight - fixedTop;
   const bottomFreeSpace = maxHeight - options.childrenHeight;
   const isBottomOverflow = bottomFreeSpace < 0;
@@ -127,4 +128,17 @@ function fixLeftPosition(childrenLeft: number, childrenWidth: number, windowWidt
 export function computeLeftPosition(options: HorizontalOptions): number {
   const childLeft = computeChildLeftPosition(options);
   return fixLeftPosition(childLeft, options.childrenWidth, options.windowWidth);
+}
+
+export function getScrollableParents(
+  target: HTMLElement,
+  parents: HTMLElement[] = [],
+): HTMLElement[] {
+  const { parentElement } = target;
+  if (parentElement) {
+    const isScrollable = parentElement.scrollHeight > parentElement.clientHeight;
+    const newParents = isScrollable ? parents.concat(parentElement) : parents;
+    return getScrollableParents(parentElement, newParents);
+  }
+  return parents;
 }
