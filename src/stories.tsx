@@ -178,36 +178,35 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
           {buttonLabel}
         </button>
         <button onClick={this.toogleChoices}>Change choices</button>
-        {opened &&
-          this.button && (
-            <DropPortal
-              target={this.button}
-              alignment={alignment}
-              className={dropdownClassName}
-              classNames={dropdownClassNames}
-              timeout={300}
-              position={position}
-              offset={offset}
-              onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
-            >
-              {withChildFunction ? (
-                ({ position }) => (
-                  <div>
-                    <div>{position}</div>
-                    {choices.map(choice => (
-                      <div key={choice}>{choice}</div>
-                    ))}
-                  </div>
-                )
-              ) : (
+        {opened && this.button && (
+          <DropPortal
+            target={this.button}
+            alignment={alignment}
+            className={dropdownClassName}
+            classNames={dropdownClassNames}
+            timeout={300}
+            position={position}
+            offset={offset}
+            onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
+          >
+            {withChildFunction ? (
+              ({ position }) => (
                 <div>
+                  <div>{position}</div>
                   {choices.map(choice => (
                     <div key={choice}>{choice}</div>
                   ))}
                 </div>
-              )}
-            </DropPortal>
-          )}
+              )
+            ) : (
+              <div>
+                {choices.map(choice => (
+                  <div key={choice}>{choice}</div>
+                ))}
+              </div>
+            )}
+          </DropPortal>
+        )}
       </div>
     );
   }
