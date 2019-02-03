@@ -5328,10 +5328,10 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-aniportal@^0.1.4:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.1.4.tgz#ba86f33d5d32dc6a8887bbe7000a7e3356eab105"
-  integrity sha512-pMhIiaaIcpFbwsuoQ5vjOxL06kK5ua2przaMAIyIgfp1D9huc/UAwt5I3MpUYC8WgI7WwHNWszuwa0GEWJTcYA==
+react-aniportal@^0.1.6:
+  version "0.1.6"
+  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.1.6.tgz#4008d3a1690e8c6a2619e1106fe95769f58a4e87"
+  integrity sha512-f2HAhs8R5tb7geZYmNud+BY8Qgrx0Yw28t/1EP4mMXJcqK0Fj6F2JEhMZJqg9aAxmiKaawpVINVuvJMt81Fagw==
   dependencies:
     classnames "^2.2.6"
     tslib "^1.9.3"

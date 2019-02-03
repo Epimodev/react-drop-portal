@@ -23,7 +23,7 @@
     "build": "rm -rf ./module && tsc",
     "lint": "tslint -c tslint.json 'src/**/*.ts?(x)'",
     "check-format": "prettier --list-different 'src/**/*.ts?(x)'",
-    "storybook": "start-storybook -s ./ -p 9001 -c .storybook",
+    "storybook": "start-storybook --ci -s ./ -p 9001 -c .storybook",
     "prepare": "yarn lint && yarn check-format && yarn build"
   },
   "devDependencies": {
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "react-aniportal": "^0.1.4",
+    "react-aniportal": "^0.1.6",
     "tslib": "^1.9.3"
   }
 }
