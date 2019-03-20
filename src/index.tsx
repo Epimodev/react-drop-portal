@@ -64,7 +64,9 @@ class DropPortal extends Component<Props, State> {
   }
 
   componentDidMount() {
-    setTimeout(() => window.addEventListener('click', this.handleClick), 20);
+    // prevent click event just after componentDidMount
+    // to avoid call `onClickOutside` when portal is open by a click on a button
+    requestAnimationFrame(() => window.addEventListener('click', this.handleClick));
     window.addEventListener('resize', this.updatePositionStyle);
 
     this.scrollableParents = getScrollableParents(this.props.target);
@@ -118,16 +120,14 @@ class DropPortal extends Component<Props, State> {
       return;
     }
     const { position, alignment, target, offset, onClickOutside } = this.props;
-    const {
-      top: targetTop,
-      left: targetLeft,
-      height: targetHeight,
-      width: targetWidth,
-    } = target.getBoundingClientRect();
+    const { top, left, height: targetHeight, width: targetWidth } = target.getBoundingClientRect();
     const windowHeight = window.innerHeight;
     const windowWidth = window.innerWidth;
     const childrenWidth = this.childContainer.offsetWidth;
     const childrenHeight = this.childContainer.offsetHeight;
+
+    const targetTop = top + window.scrollY;
+    const targetLeft = left + window.scrollX;
 
     const verticalMeasure = computeVerticalMeasure({
       position,

@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import { createElement, Component, CSSProperties } from 'react';
 import { storiesOf } from '@storybook/react';
 import DropPortal from './index';
 
@@ -124,7 +124,13 @@ storiesOf('DropPortal/Children function', module)
     />
   ));
 storiesOf('DropPortal/With click outside', module).add('default', () => (
-  <DropdownExample buttonClassName="button_center-center" alignment="center" withClickOutside />
+  <DropdownExample buttonClassName="button_center-center" alignment="center" withClickOutside />
+));
+storiesOf('DropPortal/With long body', module).add('default', () => (
+  <div>
+    <div>Scroll down to see dropdown button</div>
+    <DropdownExample buttonClassName="button_outside-center" alignment="center" />
+  </div>
 ));
 
 interface ExampleProps {
