@@ -146,8 +146,11 @@ class DropPortal extends Component<Props, State> {
       offset: offset.x,
     });
 
-    const isInScreen =
-      verticalMeasure.top + verticalMeasure.height > 0 && verticalMeasure.top < windowHeight;
+    const measuredTop = verticalMeasure.top;
+    const measuredBottom = verticalMeasure.top + verticalMeasure.height;
+    const windowTop = window.scrollY;
+    const windowBottom = windowHeight + window.scrollY;
+    const isInScreen = measuredBottom > windowTop && measuredTop < windowBottom;
 
     if (isInScreen) {
       const style: CSSProperties = {
