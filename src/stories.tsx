@@ -79,6 +79,21 @@ storiesOf('DropPortal/Offset', module)
       alignment="center"
       offset={{ x: -150, y: -50 }}
     />
+  ))
+  .add('offset y reverse when position is top', () => (
+    <DropdownExample
+      buttonClassName="button_center-center"
+      alignment="center"
+      position="top"
+      offset={{ x: 0, y: 50 }}
+    />
+  ))
+  .add('offset y reverse when target is at bottom', () => (
+    <DropdownExample
+      buttonClassName="button_bottom-center"
+      alignment="center"
+      offset={{ x: 0, y: 50 }}
+    />
   ));
 storiesOf('DropPortal/Top', module)
   .add('default', () => (

@@ -34,7 +34,7 @@ function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure 
     const moreSpaceAtTop = options.targetTop > maxHeight;
 
     if (moreSpaceAtTop) {
-      const topPosition = options.targetTop - options.childrenHeight;
+      const topPosition = options.targetTop - options.childrenHeight - options.offset;
       const isTopOverflow = topPosition < 0;
       const height = isTopOverflow ? options.targetTop : options.childrenHeight;
       return {
@@ -59,15 +59,16 @@ function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure 
 }
 
 function computeTopPortalVertical(options: VerticalOptions): VerticalMeasure {
-  const topPosition = options.targetTop - options.childrenHeight + options.offset;
+  const topPosition = options.targetTop - options.childrenHeight - options.offset;
   const isTopOverflow = topPosition < 0;
 
   if (isTopOverflow) {
-    const bottomSpace = options.windowHeight - (options.targetTop + options.targetHeight);
-    const moreSpaceAtBottom = bottomSpace > options.targetTop;
+    const bottomSpace =
+      options.windowHeight - (options.targetTop + options.targetHeight + options.offset);
+    const moreSpaceAtBottom = bottomSpace > options.targetTop - options.offset;
 
     if (moreSpaceAtBottom) {
-      const top = options.targetTop + options.targetHeight;
+      const top = options.targetTop + options.targetHeight + options.offset;
       const maxHeight = options.windowHeight - top;
       const bottomFreeSpace = maxHeight - options.childrenHeight;
       const isBottomOverflow = bottomFreeSpace < 0;
