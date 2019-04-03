@@ -36,7 +36,7 @@ function computeBottomPortalVertical(options: VerticalOptions): VerticalMeasure 
     if (moreSpaceAtTop) {
       const topPosition = options.targetTop - options.childrenHeight - options.offset;
       const isTopOverflow = topPosition < 0;
-      const height = isTopOverflow ? options.targetTop : options.childrenHeight;
+      const height = isTopOverflow ? options.targetTop - options.offset : options.childrenHeight;
       return {
         height,
         top: Math.max(0, topPosition),
