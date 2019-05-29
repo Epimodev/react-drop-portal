@@ -41,6 +41,8 @@ function computePortalMesure(
     alignement = 'start',
     minWidth = Infinity,
     minHeight = Infinity,
+    offsetX = 0,
+    offsetY = 0,
   } = options;
 
   return {
@@ -48,6 +50,8 @@ function computePortalMesure(
     position,
     top: target.top,
     left: target.left,
+    alignOffsetX: 0,
+    alignOffsetY: 0,
   };
 }
 

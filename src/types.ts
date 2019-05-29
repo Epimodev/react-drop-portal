@@ -18,6 +18,8 @@ export interface MeasurePortalOptions {
   minHeight?: number;
   position?: PortalPosition;
   alignement?: PortalAlignement;
+  offsetX?: number;
+  offsetY?: number;
 }
 
 export interface TargetMeasure {
@@ -34,6 +36,8 @@ export interface PortalMeasure {
   left: number;
   position: PortalPosition;
   alignement: PortalAlignement;
+  alignOffsetX: number;
+  alignOffsetY: number;
 }
 
 export interface ContentMeasure {

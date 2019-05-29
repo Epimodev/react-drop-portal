@@ -10,7 +10,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -36,7 +36,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 400,
         left: 100,
         right: 400,
@@ -62,7 +62,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 400,
         left: 100,
         right: 400,
@@ -89,7 +89,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 450,
         left: 100,
         right: 400,
@@ -116,7 +116,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -144,7 +144,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 400,
         left: 100,
         right: 400,
@@ -170,7 +170,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -196,7 +196,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 150,
         left: 100,
         right: 400,
@@ -223,7 +223,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 50,
         left: 100,
         right: 400,
@@ -250,7 +250,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 400,
         left: 100,
         right: 400,
@@ -278,7 +278,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 400,
         right: 100,
@@ -304,7 +304,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -330,7 +330,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 150,
         right: 400,
@@ -357,7 +357,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 50,
         right: 400,
@@ -384,7 +384,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 400,
         right: 100,
@@ -412,7 +412,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -438,7 +438,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 400,
         right: 100,
@@ -464,7 +464,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 400,
         right: 150,
@@ -491,7 +491,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 400,
         right: 50,
@@ -518,7 +518,7 @@ describe('computePortalMesure', () => {
       };
       const target: TargetMeasure = {
         width: 400,
-        height: 50,
+        height: 60,
         top: 100,
         left: 100,
         right: 400,
@@ -535,6 +535,396 @@ describe('computePortalMesure', () => {
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+    });
+  });
+
+  describe('alignement: horizontal start', () => {
+    test('portal should be left aligned with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'start',
+      };
+
+      const expectedLeft = 100;
+      const expectedOffsetX = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+
+    test('portal should be move to left to avoid right overflow', () => {
+      const content: ContentMeasure = {
+        width: 600,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 200,
+        right: 100,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'start',
+      };
+
+      const expectedLeft = 100;
+      const expectedOffsetX = -100;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+  });
+
+  describe('alignement: horizontal middle', () => {
+    test('portal should be center with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 400,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'middle',
+      };
+
+      const expectedLeft = 500;
+      const expectedOffsetX = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+
+    test('portal should be move to left to avoid right overflow', () => {
+      const content: ContentMeasure = {
+        width: 800,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 400,
+        right: 100,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'middle',
+      };
+
+      const expectedLeft = 100;
+      const expectedOffsetX = -100;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+
+    test('portal should be move to right to avoid left overflow', () => {
+      const content: ContentMeasure = {
+        width: 800,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'middle',
+      };
+
+      const expectedLeft = 0;
+      const expectedOffsetX = 100;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+  });
+
+  describe('alignement: horizontal end', () => {
+    test('portal should be right aligned with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 400,
+        right: 100,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'end',
+      };
+
+      const expectedLeft = target.left + target.width - content.width;
+      const expectedOffsetX = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+
+    test('portal should be move to right to avoid left overflow', () => {
+      const content: ContentMeasure = {
+        width: 600,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 200,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        alignement: 'end',
+      };
+
+      const expectedLeft = 0;
+      const expectedOffsetX = 100;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.left).toBe(expectedLeft);
+      expect(result.alignOffsetX).toBe(expectedOffsetX);
+    });
+  });
+
+  describe('alignement: vertical start', () => {
+    test('portal should be top aligned with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'start',
+      };
+
+      const expectedTop = 100;
+      const expectedOffsetY = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+
+    test('portal should be move to top to avoid bottom overflow', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'start',
+      };
+
+      const expectedTop = 60;
+      const expectedOffsetY = -40;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+  });
+
+  describe('alignement: vertical middle', () => {
+    test('portal should be center with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 100,
+        top: 400,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'middle',
+      };
+
+      const expectedTop = 350;
+      const expectedOffsetY = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+
+    test('portal should be move to top to avoid bottom overflow', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 400,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 100,
+        top: 400,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'middle',
+      };
+
+      const expectedTop = 200;
+      const expectedOffsetY = -50;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+
+    test('portal should be move to bottom to avoid top overflow', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 400,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 100,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'middle',
+      };
+
+      const expectedTop = 0;
+      const expectedOffsetY = 50;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+  });
+
+  describe('alignement: vertical end', () => {
+    test('portal should be bottom aligned with target', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 400,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'end',
+      };
+
+      const expectedTop = target.top + target.height - content.height;
+      const expectedOffsetY = 0;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
+    });
+
+    test('portal should be move to bottom to avoid top overflow', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        alignement: 'end',
+      };
+
+      const expectedTop = 0;
+      const expectedOffsetY = 40;
+
+      const result = measure.computePortalMesure(content, target, options);
+
+      expect(result.top).toBe(expectedTop);
+      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
   });
 });
