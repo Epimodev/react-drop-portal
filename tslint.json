@@ -8,6 +8,7 @@
     "function-name": false,
     "variable-name": false,
     "import-name": false,
-    "align": false
+    "align": false,
+    "max-line-length": false
   }
 }
