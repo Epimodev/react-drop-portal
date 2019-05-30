@@ -22,7 +22,7 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
-      const expectedHeight = target.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
