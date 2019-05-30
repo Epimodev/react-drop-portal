@@ -1,5 +1,4 @@
 import {
-  MeasureTargetParams,
   MeasurePortalOptions,
   TargetMeasure,
   PortalMeasure,
@@ -8,28 +7,22 @@ import {
   PortalAlignement,
 } from './types';
 
-function measureAxeSpace({
-  bodyWidth,
-  bodyHeight,
-  scrollY,
-  scrollX,
-  targetTop,
-  targetLeft,
-  targetWidth,
-  targetHeight,
-}: MeasureTargetParams): TargetMeasure {
-  const top = scrollY + targetTop;
-  const left = scrollX + targetLeft;
-  const right = bodyWidth - targetWidth - left;
-  const bottom = bodyHeight - targetHeight - top;
+function computeTargetMeasure(target: HTMLElement): TargetMeasure {
+  const scrollX = document.body.scrollLeft;
+  const scrollY = document.body.scrollTop;
+  const targetRect = target.getBoundingClientRect();
+  const top = scrollY + targetRect.top;
+  const left = scrollX + targetRect.left;
+  const right = document.body.scrollWidth - targetRect.width - left;
+  const bottom = document.body.scrollHeight - targetRect.height - top;
 
   return {
     top,
     left,
     right,
     bottom,
-    width: targetWidth,
-    height: targetHeight,
+    width: targetRect.width,
+    height: targetRect.height,
   };
 }
 
@@ -149,11 +142,20 @@ function computePortalMesure(
     offsetY = 0,
   } = options;
 
+  const targetWithOffset: TargetMeasure = {
+    width: target.width,
+    height: target.height,
+    top: target.top - offsetY,
+    right: target.right + offsetX,
+    bottom: target.bottom + offsetY,
+    left: target.left - offsetX,
+  };
+
   switch (position) {
     case 'bottom': {
-      const overflowBottom = content.height - target.bottom;
-      const minHeightOverflowBottom = minHeight - target.bottom;
-      const overflowTop = content.height - target.top;
+      const overflowBottom = content.height - targetWithOffset.bottom;
+      const minHeightOverflowBottom = minHeight - targetWithOffset.bottom;
+      const overflowTop = content.height - targetWithOffset.top;
       const portalPosition: PortalPosition =
         overflowBottom < 0 || minHeightOverflowBottom < 0 || overflowBottom < overflowTop
           ? 'bottom'
@@ -161,7 +163,7 @@ function computePortalMesure(
 
       const { top, left, height } = computePortalVerticalMeasure(
         content,
-        target,
+        targetWithOffset,
         portalPosition,
         alignement,
       );
@@ -178,9 +180,9 @@ function computePortalMesure(
     }
 
     case 'top': {
-      const overflowTop = content.height - target.top;
-      const minHeightOverflowTop = minHeight - target.top;
-      const overflowBottom = content.height - target.bottom;
+      const overflowTop = content.height - targetWithOffset.top;
+      const minHeightOverflowTop = minHeight - targetWithOffset.top;
+      const overflowBottom = content.height - targetWithOffset.bottom;
       const portalPosition: PortalPosition =
         overflowTop < 0 || minHeightOverflowTop < 0 || overflowTop < overflowBottom
           ? 'top'
@@ -188,7 +190,7 @@ function computePortalMesure(
 
       const { top, left, height } = computePortalVerticalMeasure(
         content,
-        target,
+        targetWithOffset,
         portalPosition,
         alignement,
       );
@@ -205,9 +207,9 @@ function computePortalMesure(
     }
 
     case 'left': {
-      const overflowLeft = content.width - target.left;
-      const minHeightOverflowLeft = minWidth - target.left;
-      const overflowRight = content.width - target.right;
+      const overflowLeft = content.width - targetWithOffset.left;
+      const minHeightOverflowLeft = minWidth - targetWithOffset.left;
+      const overflowRight = content.width - targetWithOffset.right;
       const portalPosition: PortalPosition =
         overflowLeft < 0 || minHeightOverflowLeft < 0 || overflowLeft < overflowRight
           ? 'left'
@@ -215,7 +217,7 @@ function computePortalMesure(
 
       const { top, left, width } = computePortalHorizontalMeasure(
         content,
-        target,
+        targetWithOffset,
         portalPosition,
         alignement,
       );
@@ -232,9 +234,9 @@ function computePortalMesure(
     }
 
     case 'right': {
-      const overflowRight = content.width - target.right;
-      const minHeightOverflowRight = minWidth - target.right;
-      const overflowLeft = content.width - target.left;
+      const overflowRight = content.width - targetWithOffset.right;
+      const minHeightOverflowRight = minWidth - targetWithOffset.right;
+      const overflowLeft = content.width - targetWithOffset.left;
       const portalPosition: PortalPosition =
         overflowRight < 0 || minHeightOverflowRight < 0 || overflowRight < overflowLeft
           ? 'right'
@@ -242,7 +244,7 @@ function computePortalMesure(
 
       const { top, left, width } = computePortalHorizontalMeasure(
         content,
-        target,
+        targetWithOffset,
         portalPosition,
         alignement,
       );
@@ -270,4 +272,4 @@ function computePortalMesure(
   };
 }
 
-export { measureAxeSpace, computePortalMesure };
+export { computeTargetMeasure, computePortalMesure };
