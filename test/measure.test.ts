@@ -22,11 +22,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
+      const expectedHeight = target.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be above target if there isn't enough space", () => {
@@ -48,11 +50,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'top';
       const expectedTop = target.top - content.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be below target if there isn't enough space but more than min height", () => {
@@ -75,11 +79,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
+      const expectedHeight = target.bottom;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be above target if there isn't enough space and less than min height", () => {
@@ -102,11 +108,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'top';
       const expectedTop = target.top - content.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be below target if there isn't enough space but more than above", () => {
@@ -128,11 +136,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
+      const expectedHeight = target.bottom;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
   });
 
@@ -156,11 +166,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'top';
       const expectedTop = target.top - content.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be below target if there isn't enough space", () => {
@@ -182,11 +194,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be above target if there isn't enough space but more than min height", () => {
@@ -209,11 +223,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'top';
       const expectedTop = 0;
+      const expectedHeight = target.top;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be below target if there isn't enough space and less than min height", () => {
@@ -236,11 +252,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'bottom';
       const expectedTop = target.top + target.height;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
 
     test("should be above target if there isn't enough space but more than below", () => {
@@ -262,11 +280,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'top';
       const expectedTop = 0;
+      const expectedHeight = target.top;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
     });
   });
 
@@ -290,11 +310,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'left';
       const expectedLeft = target.left - content.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at right of target if there isn't enough space", () => {
@@ -316,11 +338,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at left of target if there isn't enough space but more than min width", () => {
@@ -343,11 +367,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'left';
       const expectedLeft = 0;
+      const expectedWidth = target.left;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at right of target if there isn't enough space and less than min width", () => {
@@ -370,11 +396,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at left of target if there isn't enough space but more than at right", () => {
@@ -396,11 +424,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'left';
       const expectedLeft = 0;
+      const expectedWidth = target.left;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
   });
 
@@ -424,11 +454,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at left of target if there isn't enough space", () => {
@@ -450,11 +482,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'left';
       const expectedLeft = target.left - content.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at right of target if there isn't enough space but more than min width", () => {
@@ -477,11 +511,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
+      const expectedWidth = target.right;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at left of target if there isn't enough space and less than min width", () => {
@@ -504,11 +540,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'left';
       const expectedLeft = target.left - content.width;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
 
     test("should be at right of target if there isn't enough space but more than at left", () => {
@@ -530,11 +568,13 @@ describe('computePortalMesure', () => {
 
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
+      const expectedWidth = target.right;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
     });
   });
 
