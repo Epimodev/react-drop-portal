@@ -46,12 +46,13 @@ function computePortalMesure(
   } = options;
 
   return {
+    target,
     alignement,
     position,
     top: target.top,
     left: target.left,
-    alignOffsetX: 0,
-    alignOffsetY: 0,
+    width: content.width,
+    height: content.height,
   };
 }
 

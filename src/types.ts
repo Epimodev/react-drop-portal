@@ -34,10 +34,11 @@ export interface TargetMeasure {
 export interface PortalMeasure {
   top: number;
   left: number;
+  width: number;
+  height: number;
   position: PortalPosition;
   alignement: PortalAlignement;
-  alignOffsetX: number;
-  alignOffsetY: number;
+  target: TargetMeasure;
 }
 
 export interface ContentMeasure {

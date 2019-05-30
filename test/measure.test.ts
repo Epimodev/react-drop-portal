@@ -558,12 +558,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 100;
-      const expectedOffsetX = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
 
     test('portal should be move to left to avoid right overflow', () => {
@@ -585,12 +583,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 100;
-      const expectedOffsetX = -100;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
   });
 
@@ -614,12 +610,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 500;
-      const expectedOffsetX = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
 
     test('portal should be move to left to avoid right overflow', () => {
@@ -641,12 +635,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 100;
-      const expectedOffsetX = -100;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
 
     test('portal should be move to right to avoid left overflow', () => {
@@ -668,12 +660,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 0;
-      const expectedOffsetX = 100;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
   });
 
@@ -697,12 +687,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = target.left + target.width - content.width;
-      const expectedOffsetX = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
 
     test('portal should be move to right to avoid left overflow', () => {
@@ -724,12 +712,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedLeft = 0;
-      const expectedOffsetX = 100;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
-      expect(result.alignOffsetX).toBe(expectedOffsetX);
     });
   });
 
@@ -753,12 +739,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 100;
-      const expectedOffsetY = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
 
     test('portal should be move to top to avoid bottom overflow', () => {
@@ -780,12 +764,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 60;
-      const expectedOffsetY = -40;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
   });
 
@@ -809,12 +791,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 350;
-      const expectedOffsetY = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
 
     test('portal should be move to top to avoid bottom overflow', () => {
@@ -836,12 +816,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 200;
-      const expectedOffsetY = -50;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
 
     test('portal should be move to bottom to avoid top overflow', () => {
@@ -863,12 +841,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 0;
-      const expectedOffsetY = 50;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
   });
 
@@ -892,12 +868,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = target.top + target.height - content.height;
-      const expectedOffsetY = 0;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
 
     test('portal should be move to bottom to avoid top overflow', () => {
@@ -919,12 +893,10 @@ describe('computePortalMesure', () => {
       };
 
       const expectedTop = 0;
-      const expectedOffsetY = 40;
 
       const result = measure.computePortalMesure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
-      expect(result.alignOffsetY).toBe(expectedOffsetY);
     });
   });
 });
