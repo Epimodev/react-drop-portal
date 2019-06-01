@@ -168,8 +168,8 @@ function computePortalMeasure(
     width: target.width,
     height: target.height,
     top: target.top - offsetY,
-    right: target.right + offsetX,
-    bottom: target.bottom + offsetY,
+    right: target.right - offsetX,
+    bottom: target.bottom - offsetY,
     left: target.left - offsetX,
   };
 

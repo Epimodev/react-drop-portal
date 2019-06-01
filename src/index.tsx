@@ -127,7 +127,11 @@ class DropPortal extends Component<Props, PortalMeasure> {
   setChildContainer(ref: HTMLDivElement | null) {
     this.childContainer = ref;
     this.updateChildMeasure();
-    this.updatePortalMeasure();
+
+    // avoid setState on unmount
+    if (this.childContainer) {
+      this.updatePortalMeasure();
+    }
   }
 
   updateChildMeasure() {
