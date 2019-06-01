@@ -152,12 +152,23 @@ storiesOf('DropPortal/Children function', module)
 storiesOf('DropPortal/With click outside', module).add('default', () => (
   <DropdownExample buttonClassName="button_center-center" alignment="middle" withClickOutside />
 ));
-storiesOf('DropPortal/With long body', module).add('default', () => (
-  <div>
-    <div>Scroll down to see dropdown button</div>
-    <DropdownExample buttonClassName="button_outside-center" alignment="middle" />
-  </div>
-));
+storiesOf('DropPortal/With long body', module)
+  .add('default', () => (
+    <div>
+      <div>Scroll down to see dropdown button</div>
+      <DropdownExample buttonClassName="button_outside-center" alignment="middle" />
+    </div>
+  ))
+  .add('can overflow', () => (
+    <div>
+      <div>Scroll down to see dropdown button</div>
+      <DropdownExample
+        buttonClassName="button_outside-center"
+        alignment="middle"
+        canOverflowScreen
+      />
+    </div>
+  ));
 
 interface ExampleProps {
   buttonClassName: string;
@@ -167,6 +178,7 @@ interface ExampleProps {
   offsetY?: number;
   withChildFunction?: boolean;
   withClickOutside?: boolean;
+  canOverflowScreen?: boolean;
 }
 
 const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
@@ -199,6 +211,7 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
       buttonClassName,
       alignment,
       position = 'bottom',
+      canOverflowScreen,
       offsetX,
       offsetY,
       withChildFunction = false,
@@ -215,14 +228,16 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
         {opened && this.button && (
           <DropPortal
             target={this.button}
+            position={position}
             alignment={alignment}
+            canOverflowScreen={canOverflowScreen}
+            offsetX={offsetX}
+            offsetY={offsetY}
             className={dropdownClassName}
             classNames={dropdownClassNames}
             timeout={300}
-            position={position}
-            offsetX={offsetX}
-            offsetY={offsetY}
             onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
+            onLeaveScreen={withClickOutside ? this.toogleDropdown : undefined}
           >
             {withChildFunction ? (
               ({ position }) => (

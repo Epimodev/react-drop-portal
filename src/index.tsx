@@ -20,6 +20,7 @@ interface Props {
   target: HTMLElement;
   position: PortalPosition;
   alignment: PortalAlignment;
+  canOverflowScreen: boolean;
   offsetX: number;
   offsetY: number;
   minWidth: number;
@@ -51,6 +52,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
   static defaultProps = {
     position: 'bottom',
     alignment: 'start',
+    canOverflowScreen: false,
     offsetX: 0,
     offsetY: 0,
     minWidth: Infinity,
@@ -146,7 +148,16 @@ class DropPortal extends Component<Props, PortalMeasure> {
   }
 
   updatePortalMeasure() {
-    const { target, position, alignment, offsetX, offsetY, minWidth, minHeight } = this.props;
+    const {
+      target,
+      position,
+      alignment,
+      canOverflowScreen,
+      offsetX,
+      offsetY,
+      minWidth,
+      minHeight,
+    } = this.props;
     const targetMeasure = computeTargetMeasure(target);
     const options: MeasurePortalOptions = {
       position,
@@ -155,6 +166,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
       offsetY,
       minWidth,
       minHeight,
+      canOverflowScreen,
     };
     const portalMeasure = computePortalMeasure(this.childSize, targetMeasure, options);
 

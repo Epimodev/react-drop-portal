@@ -16,6 +16,10 @@ function getEmptyMeasure(): TargetMeasure {
     bottom: 0,
     width: 0,
     height: 0,
+    windowTop: 0,
+    windowLeft: 0,
+    windowRight: 0,
+    windowBottom: 0,
   };
 }
 
@@ -35,6 +39,10 @@ function computeTargetMeasure(target: HTMLElement): TargetMeasure {
     left,
     right,
     bottom,
+    windowTop: targetRect.top,
+    windowLeft: targetRect.left,
+    windowRight: window.innerWidth - targetRect.left - targetRect.width,
+    windowBottom: window.innerHeight - targetRect.bottom - targetRect.height,
     width: targetRect.width,
     height: targetRect.height,
   };
@@ -162,22 +170,19 @@ function computePortalMeasure(
     minHeight = Infinity,
     offsetX = 0,
     offsetY = 0,
+    canOverflowScreen = false,
   } = options;
-
-  const targetWithOffset: TargetMeasure = {
-    width: target.width,
-    height: target.height,
-    top: target.top - offsetY,
-    right: target.right - offsetX,
-    bottom: target.bottom - offsetY,
-    left: target.left - offsetX,
-  };
 
   switch (position) {
     case 'bottom': {
-      const overflowBottom = content.height - targetWithOffset.bottom;
-      const minHeightOverflowBottom = minHeight - targetWithOffset.bottom;
-      const overflowTop = content.height - targetWithOffset.top;
+      const bottomLimit = canOverflowScreen
+        ? target.bottom - offsetY
+        : target.windowBottom - offsetY;
+      const topLimit = canOverflowScreen ? target.top - offsetY : target.windowTop - offsetY;
+
+      const overflowBottom = content.height - bottomLimit;
+      const minHeightOverflowBottom = minHeight - bottomLimit;
+      const overflowTop = content.height - topLimit;
       const portalPosition: PortalPosition =
         overflowBottom < 0 || minHeightOverflowBottom < 0 || overflowBottom < overflowTop
           ? 'bottom'
@@ -204,9 +209,14 @@ function computePortalMeasure(
     }
 
     case 'top': {
-      const overflowTop = content.height - targetWithOffset.top;
-      const minHeightOverflowTop = minHeight - targetWithOffset.top;
-      const overflowBottom = content.height - targetWithOffset.bottom;
+      const topLimit = canOverflowScreen ? target.top - offsetY : target.windowTop - offsetY;
+      const bottomLimit = canOverflowScreen
+        ? target.bottom - offsetY
+        : target.windowBottom - offsetY;
+
+      const overflowTop = content.height - topLimit;
+      const minHeightOverflowTop = minHeight - topLimit;
+      const overflowBottom = content.height - bottomLimit;
       const portalPosition: PortalPosition =
         overflowTop < 0 || minHeightOverflowTop < 0 || overflowTop < overflowBottom
           ? 'top'
@@ -233,9 +243,12 @@ function computePortalMeasure(
     }
 
     case 'left': {
-      const overflowLeft = content.width - targetWithOffset.left;
-      const minHeightOverflowLeft = minWidth - targetWithOffset.left;
-      const overflowRight = content.width - targetWithOffset.right;
+      const leftLimit = canOverflowScreen ? target.left - offsetY : target.windowLeft - offsetY;
+      const rightLimit = canOverflowScreen ? target.right - offsetY : target.windowRight - offsetY;
+
+      const overflowLeft = content.width - leftLimit;
+      const minHeightOverflowLeft = minWidth - leftLimit;
+      const overflowRight = content.width - rightLimit;
       const portalPosition: PortalPosition =
         overflowLeft < 0 || minHeightOverflowLeft < 0 || overflowLeft < overflowRight
           ? 'left'
@@ -262,9 +275,12 @@ function computePortalMeasure(
     }
 
     case 'right': {
-      const overflowRight = content.width - targetWithOffset.right;
-      const minHeightOverflowRight = minWidth - targetWithOffset.right;
-      const overflowLeft = content.width - targetWithOffset.left;
+      const rightLimit = canOverflowScreen ? target.right - offsetY : target.windowRight - offsetY;
+      const leftLimit = canOverflowScreen ? target.left - offsetY : target.windowLeft - offsetY;
+
+      const overflowRight = content.width - rightLimit;
+      const minHeightOverflowRight = minWidth - rightLimit;
+      const overflowLeft = content.width - leftLimit;
       const portalPosition: PortalPosition =
         overflowRight < 0 || minHeightOverflowRight < 0 || overflowRight < overflowLeft
           ? 'right'

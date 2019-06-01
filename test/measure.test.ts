@@ -15,6 +15,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -43,6 +47,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -71,6 +79,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 150,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 150,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -100,6 +112,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 50,
+        windowTop: 450,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 50,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -129,6 +145,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -157,6 +177,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -174,7 +198,7 @@ describe('computePortalMesure', () => {
       expect(result.height).toBe(expectedHeight);
     });
 
-    test("should move up portal with offsetX if there isn\'t enough space", () => {
+    test("should move up portal with offsetX if there isn't enough space", () => {
       const content: ContentMeasure = {
         width: 200,
         height: 200,
@@ -186,6 +210,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'bottom',
@@ -217,6 +245,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -245,6 +277,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -273,6 +309,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 150,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -302,6 +342,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 50,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -331,6 +375,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -359,6 +407,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -376,7 +428,7 @@ describe('computePortalMesure', () => {
       expect(result.height).toBe(expectedHeight);
     });
 
-    test("should move down portal with offsetX if there isn\'t enough space", () => {
+    test("should move down portal with offsetX if there isn't enough space", () => {
       const content: ContentMeasure = {
         width: 200,
         height: 200,
@@ -388,6 +440,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -419,6 +475,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -447,6 +507,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -475,6 +539,10 @@ describe('computePortalMesure', () => {
         left: 150,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 150,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -504,6 +572,10 @@ describe('computePortalMesure', () => {
         left: 50,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 50,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -533,6 +605,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -561,6 +637,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -578,7 +658,7 @@ describe('computePortalMesure', () => {
       expect(result.width).toBe(expectedWidth);
     });
 
-    test("should move right portal with offsetX if there isn\'t enough space", () => {
+    test("should move right portal with offsetX if there isn't enough space", () => {
       const content: ContentMeasure = {
         width: 200,
         height: 200,
@@ -590,6 +670,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'left',
@@ -621,6 +705,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -649,6 +737,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -677,6 +769,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 150,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 150,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -706,6 +802,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 50,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 50,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -735,6 +835,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -763,6 +867,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -780,7 +888,7 @@ describe('computePortalMesure', () => {
       expect(result.width).toBe(expectedWidth);
     });
 
-    test('should move left portal with offsetX if there isn\'t enough space', () => {
+    test("should move left portal with offsetX if there isn't enough space", () => {
       const content: ContentMeasure = {
         width: 200,
         height: 200,
@@ -792,6 +900,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -823,6 +935,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -848,6 +964,10 @@ describe('computePortalMesure', () => {
         left: 200,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 200,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -875,6 +995,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -900,6 +1024,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -925,6 +1053,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -952,6 +1084,10 @@ describe('computePortalMesure', () => {
         left: 400,
         right: 100,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 400,
+        windowRight: 100,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -977,6 +1113,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 200,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 200,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'top',
@@ -1004,6 +1144,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1029,6 +1173,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1056,6 +1204,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1081,6 +1233,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1106,6 +1262,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 400,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 400,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1133,6 +1293,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 400,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'right',
@@ -1158,6 +1322,10 @@ describe('computePortalMesure', () => {
         left: 100,
         right: 400,
         bottom: 100,
+        windowTop: 100,
+        windowLeft: 100,
+        windowRight: 400,
+        windowBottom: 100,
       };
       const options: MeasurePortalOptions = {
         position: 'right',

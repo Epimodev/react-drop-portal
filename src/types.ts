@@ -9,6 +9,7 @@ export interface MeasurePortalOptions {
   alignment?: PortalAlignment;
   offsetX?: number;
   offsetY?: number;
+  canOverflowScreen?: boolean;
 }
 
 export interface TargetMeasure {
@@ -18,6 +19,10 @@ export interface TargetMeasure {
   right: number;
   bottom: number;
   left: number;
+  windowTop: number;
+  windowLeft: number;
+  windowRight: number;
+  windowBottom: number;
 }
 
 export interface PortalMeasure {
