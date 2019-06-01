@@ -1,12 +1,12 @@
 export type PortalPosition = 'top' | 'right' | 'bottom' | 'left';
 
-export type PortalAlignement = 'start' | 'middle' | 'end';
+export type PortalAlignment = 'start' | 'middle' | 'end';
 
 export interface MeasurePortalOptions {
   minWidth?: number;
   minHeight?: number;
   position?: PortalPosition;
-  alignement?: PortalAlignement;
+  alignment?: PortalAlignment;
   offsetX?: number;
   offsetY?: number;
 }
@@ -26,7 +26,7 @@ export interface PortalMeasure {
   width: number;
   height: number;
   position: PortalPosition;
-  alignement: PortalAlignement;
+  alignement: PortalAlignment;
   target: TargetMeasure;
 }
 

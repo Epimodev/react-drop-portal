@@ -1,6 +1,7 @@
 import { createElement, Component, CSSProperties } from 'react';
 import { storiesOf } from '@storybook/react';
-import DropPortal from './index';
+import DropPortal from './DropPortal';
+import { PortalPosition, PortalAlignment } from './types';
 
 // classNames are defined in `.storybook/preview-head.html`
 const dropdownClassName = 'dropdown-example';
@@ -12,139 +13,149 @@ const dropdownClassNames = {
 };
 
 storiesOf('DropPortal/Top Left', module)
-  .add('left', () => <DropdownExample buttonClassName="button_top-left" alignment="left" />)
-  .add('center', () => <DropdownExample buttonClassName="button_top-left" alignment="center" />)
-  .add('right', () => <DropdownExample buttonClassName="button_top-left" alignment="right" />);
+  .add('left', () => <DropdownExample buttonClassName="button_top-left" alignment="start" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-left" alignment="middle" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-left" alignment="end" />);
 storiesOf('DropPortal/Top Center', module)
-  .add('left', () => <DropdownExample buttonClassName="button_top-center" alignment="left" />)
-  .add('center', () => <DropdownExample buttonClassName="button_top-center" alignment="center" />)
-  .add('right', () => <DropdownExample buttonClassName="button_top-center" alignment="right" />);
+  .add('left', () => <DropdownExample buttonClassName="button_top-center" alignment="start" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-center" alignment="middle" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-center" alignment="end" />);
 storiesOf('DropPortal/Top Right', module)
-  .add('left', () => <DropdownExample buttonClassName="button_top-right" alignment="left" />)
-  .add('center', () => <DropdownExample buttonClassName="button_top-right" alignment="center" />)
-  .add('right', () => <DropdownExample buttonClassName="button_top-right" alignment="right" />);
+  .add('left', () => <DropdownExample buttonClassName="button_top-right" alignment="start" />)
+  .add('center', () => <DropdownExample buttonClassName="button_top-right" alignment="middle" />)
+  .add('right', () => <DropdownExample buttonClassName="button_top-right" alignment="end" />);
 storiesOf('DropPortal/Bottom Left', module)
-  .add('left', () => <DropdownExample buttonClassName="button_bottom-left" alignment="left" />)
-  .add('center', () => <DropdownExample buttonClassName="button_bottom-left" alignment="center" />)
-  .add('right', () => <DropdownExample buttonClassName="button_bottom-left" alignment="right" />);
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-left" alignment="start" />)
+  .add('center', () => <DropdownExample buttonClassName="button_bottom-left" alignment="middle" />)
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-left" alignment="end" />);
 storiesOf('DropPortal/Bottom Center', module)
-  .add('left', () => <DropdownExample buttonClassName="button_bottom-center" alignment="left" />)
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-center" alignment="start" />)
   .add('center', () => (
-    <DropdownExample buttonClassName="button_bottom-center" alignment="center" />
+    <DropdownExample buttonClassName="button_bottom-center" alignment="middle" />
   ))
-  .add('right', () => <DropdownExample buttonClassName="button_bottom-center" alignment="right" />);
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-center" alignment="end" />);
 storiesOf('DropPortal/Bottom Right', module)
-  .add('left', () => <DropdownExample buttonClassName="button_bottom-right" alignment="left" />)
-  .add('center', () => <DropdownExample buttonClassName="button_bottom-right" alignment="center" />)
-  .add('right', () => <DropdownExample buttonClassName="button_bottom-right" alignment="right" />);
+  .add('left', () => <DropdownExample buttonClassName="button_bottom-right" alignment="start" />)
+  .add('center', () => <DropdownExample buttonClassName="button_bottom-right" alignment="middle" />)
+  .add('right', () => <DropdownExample buttonClassName="button_bottom-right" alignment="end" />);
 storiesOf('DropPortal/Offset', module)
   .add('offset x', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: 50, y: 0 }}
+      alignment="middle"
+      offsetX={50}
+      offsetY={0}
     />
   ))
   .add('offset y', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: 0, y: 50 }}
+      alignment="middle"
+      offsetX={0}
+      offsetY={50}
     />
   ))
   .add('offset x negative', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: -50, y: 0 }}
+      alignment="middle"
+      offsetX={-50}
+      offsetY={0}
     />
   ))
   .add('offset y negative', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: 150, y: -50 }}
+      alignment="middle"
+      offsetX={150}
+      offsetY={-50}
     />
   ))
   .add('offset x + y', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: 50, y: 50 }}
+      alignment="middle"
+      offsetX={50}
+      offsetY={50}
     />
   ))
   .add('offset x + y negative', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
-      offset={{ x: -150, y: -50 }}
+      alignment="middle"
+      offsetX={-150}
+      offsetY={-50}
     />
   ))
   .add('offset y reverse when position is top', () => (
     <DropdownExample
       buttonClassName="button_center-center"
-      alignment="center"
+      alignment="middle"
       position="top"
-      offset={{ x: 0, y: 50 }}
+      offsetX={0}
+      offsetY={50}
     />
   ))
   .add('offset y reverse when target is at bottom', () => (
     <DropdownExample
       buttonClassName="button_bottom-center"
-      alignment="center"
-      offset={{ x: 0, y: 50 }}
+      alignment="middle"
+      offsetX={0}
+      offsetY={50}
     />
   ));
 storiesOf('DropPortal/Top', module)
   .add('default', () => (
-    <DropdownExample buttonClassName="button_center-center" alignment="center" position="top" />
+    <DropdownExample buttonClassName="button_center-center" alignment="middle" position="top" />
   ))
   .add('at top', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
+      alignment="middle"
       position="top"
-      offset={{ x: 10, y: 10 }}
+      offsetX={10}
+      offsetY={10}
     />
   ))
   .add('with offset', () => (
     <DropdownExample
       buttonClassName="button_center-center"
-      alignment="left"
+      alignment="start"
       position="top"
-      offset={{ x: 10, y: 10 }}
+      offsetX={10}
+      offsetY={10}
     />
   ));
 storiesOf('DropPortal/Children function', module)
   .add('at bottom', () => (
-    <DropdownExample buttonClassName="button_center-center" alignment="center" withChildFunction />
+    <DropdownExample buttonClassName="button_center-center" alignment="middle" withChildFunction />
   ))
   .add('at top', () => (
     <DropdownExample
       buttonClassName="button_center-center"
-      alignment="center"
+      alignment="middle"
       position="top"
       withChildFunction
     />
   ))
   .add('at top because of limit size', () => (
-    <DropdownExample buttonClassName="button_bottom-center" alignment="center" withChildFunction />
+    <DropdownExample buttonClassName="button_bottom-center" alignment="middle" withChildFunction />
   ))
   .add('at bottom because of limit size', () => (
     <DropdownExample
       buttonClassName="button_top-center"
-      alignment="center"
+      alignment="middle"
       position="top"
       withChildFunction
     />
   ));
 storiesOf('DropPortal/With click outside', module).add('default', () => (
-  <DropdownExample buttonClassName="button_center-center" alignment="center" withClickOutside />
+  <DropdownExample buttonClassName="button_center-center" alignment="middle" withClickOutside />
 ));
 storiesOf('DropPortal/With long body', module).add('default', () => (
   <div>
     <div>Scroll down to see dropdown button</div>
-    <DropdownExample buttonClassName="button_outside-center" alignment="center" />
+    <DropdownExample buttonClassName="button_outside-center" alignment="middle" />
   </div>
 ));
 
@@ -163,9 +174,10 @@ storiesOf('New version', module).add('test', () => (
 
 interface ExampleProps {
   buttonClassName: string;
-  alignment: 'left' | 'center' | 'right';
-  position?: 'top' | 'bottom';
-  offset?: { x: number; y: number };
+  alignment: PortalAlignment;
+  position?: PortalPosition;
+  offsetX?: number;
+  offsetY?: number;
   withChildFunction?: boolean;
   withClickOutside?: boolean;
 }
@@ -200,7 +212,8 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
       buttonClassName,
       alignment,
       position = 'bottom',
-      offset,
+      offsetX,
+      offsetY,
       withChildFunction = false,
       withClickOutside = false,
     } = this.props;
@@ -220,7 +233,8 @@ class DropdownExample extends Component<ExampleProps, { opened: boolean; choices
             classNames={dropdownClassNames}
             timeout={300}
             position={position}
-            offset={offset}
+            offsetX={offsetX}
+            offsetY={offsetY}
             onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
           >
             {withChildFunction ? (

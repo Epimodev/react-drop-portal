@@ -24,7 +24,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top + target.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -52,7 +52,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top - content.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -81,7 +81,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top + target.height;
       const expectedHeight = target.bottom;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -110,7 +110,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top - content.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -138,7 +138,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top + target.height;
       const expectedHeight = target.bottom;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -168,7 +168,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top - content.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -196,7 +196,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top + target.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -225,7 +225,7 @@ describe('computePortalMesure', () => {
       const expectedTop = 0;
       const expectedHeight = target.top;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -254,7 +254,7 @@ describe('computePortalMesure', () => {
       const expectedTop = target.top + target.height;
       const expectedHeight = content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -282,7 +282,7 @@ describe('computePortalMesure', () => {
       const expectedTop = 0;
       const expectedHeight = target.top;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.top).toBe(expectedTop);
@@ -312,7 +312,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left - content.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -340,7 +340,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left + target.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -369,7 +369,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = 0;
       const expectedWidth = target.left;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -398,7 +398,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left + target.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -426,7 +426,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = 0;
       const expectedWidth = target.left;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -456,7 +456,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left + target.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -484,7 +484,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left - content.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -513,7 +513,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left + target.width;
       const expectedWidth = target.right;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -542,7 +542,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left - content.width;
       const expectedWidth = content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -570,7 +570,7 @@ describe('computePortalMesure', () => {
       const expectedLeft = target.left + target.width;
       const expectedWidth = target.right;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.position).toBe(expectedPosition);
       expect(result.left).toBe(expectedLeft);
@@ -594,12 +594,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'start',
+        alignment: 'start',
       };
 
       const expectedLeft = 100;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -619,12 +619,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'start',
+        alignment: 'start',
       };
 
       const expectedLeft = 100;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -646,12 +646,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedLeft = 500;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -671,12 +671,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedLeft = 100;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -696,12 +696,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedLeft = 0;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -723,12 +723,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'end',
+        alignment: 'end',
       };
 
       const expectedLeft = target.left + target.width - content.width;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -748,12 +748,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'top',
-        alignement: 'end',
+        alignment: 'end',
       };
 
       const expectedLeft = 0;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.left).toBe(expectedLeft);
     });
@@ -775,12 +775,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'start',
+        alignment: 'start',
       };
 
       const expectedTop = 100;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -800,12 +800,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'start',
+        alignment: 'start',
       };
 
       const expectedTop = 60;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -827,12 +827,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedTop = 350;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -852,12 +852,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedTop = 200;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -877,12 +877,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'middle',
+        alignment: 'middle',
       };
 
       const expectedTop = 0;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -904,12 +904,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'end',
+        alignment: 'end',
       };
 
       const expectedTop = target.top + target.height - content.height;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });
@@ -929,12 +929,12 @@ describe('computePortalMesure', () => {
       };
       const options: MeasurePortalOptions = {
         position: 'right',
-        alignement: 'end',
+        alignment: 'end',
       };
 
       const expectedTop = 0;
 
-      const result = measure.computePortalMesure(content, target, options);
+      const result = measure.computePortalMeasure(content, target, options);
 
       expect(result.top).toBe(expectedTop);
     });

@@ -1,20 +1,34 @@
+import { CSSProperties } from 'react';
 import {
   MeasurePortalOptions,
   TargetMeasure,
   PortalMeasure,
   ContentMeasure,
   PortalPosition,
-  PortalAlignement,
+  PortalAlignment,
 } from './types';
 
+function getEmptyMeasure(): TargetMeasure {
+  return {
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    width: 0,
+    height: 0,
+  };
+}
+
 function computeTargetMeasure(target: HTMLElement): TargetMeasure {
-  const scrollX = document.body.scrollLeft;
-  const scrollY = document.body.scrollTop;
+  const pageWidth = window.innerWidth;
+  const pageHeight = window.innerHeight;
+  const scrollX = window.scrollX;
+  const scrollY = window.scrollY;
   const targetRect = target.getBoundingClientRect();
   const top = scrollY + targetRect.top;
   const left = scrollX + targetRect.left;
-  const right = document.body.scrollWidth - targetRect.width - left;
-  const bottom = document.body.scrollHeight - targetRect.height - top;
+  const right = pageWidth - targetRect.width - left;
+  const bottom = pageHeight - targetRect.height - top;
 
   return {
     top,
@@ -30,7 +44,7 @@ function computePortalVerticalMeasure(
   content: ContentMeasure,
   target: TargetMeasure,
   position: PortalPosition,
-  alignement: PortalAlignement,
+  alignement: PortalAlignment,
 ): { top: number; left: number; height: number } {
   const top =
     position === 'bottom' ? target.top + target.height : Math.max(target.top - content.height, 0);
@@ -47,7 +61,7 @@ function computePortalHorizontalMeasure(
   content: ContentMeasure,
   target: TargetMeasure,
   position: PortalPosition,
-  alignement: PortalAlignement,
+  alignement: PortalAlignment,
 ): { top: number; left: number; width: number } {
   const left =
     position === 'right' ? target.left + target.width : Math.max(target.left - content.width, 0);
@@ -63,7 +77,7 @@ function computePortalHorizontalMeasure(
 function computeHorizontalAlign(
   content: ContentMeasure,
   target: TargetMeasure,
-  alignement: PortalAlignement,
+  alignement: PortalAlignment,
 ): number {
   switch (alignement) {
     case 'start': {
@@ -97,7 +111,7 @@ function computeHorizontalAlign(
 function computeVerticalAlign(
   content: ContentMeasure,
   target: TargetMeasure,
-  alignement: PortalAlignement,
+  alignement: PortalAlignment,
 ): number {
   switch (alignement) {
     case 'start': {
@@ -128,14 +142,14 @@ function computeVerticalAlign(
   }
 }
 
-function computePortalMesure(
+function computePortalMeasure(
   content: ContentMeasure,
   target: TargetMeasure,
   options: MeasurePortalOptions = {},
 ): PortalMeasure {
   const {
     position = 'bottom',
-    alignement = 'start',
+    alignment: alignement = 'start',
     minWidth = Infinity,
     minHeight = Infinity,
     offsetX = 0,
@@ -145,10 +159,10 @@ function computePortalMesure(
   const targetWithOffset: TargetMeasure = {
     width: target.width,
     height: target.height,
-    top: target.top - offsetY,
-    right: target.right + offsetX,
-    bottom: target.bottom + offsetY,
-    left: target.left - offsetX,
+    top: target.top + offsetY,
+    right: target.right - offsetX,
+    bottom: target.bottom - offsetY,
+    left: target.left + offsetX,
   };
 
   switch (position) {
@@ -260,16 +274,16 @@ function computePortalMesure(
       };
     }
   }
+}
 
+function createPortalStyle(portalMesure: PortalMeasure): CSSProperties {
   return {
-    target,
-    alignement,
-    position,
-    top: target.top,
-    left: target.left,
-    width: content.width,
-    height: content.height,
+    position: 'absolute',
+    top: `${portalMesure.top}px`,
+    left: `${portalMesure.left}px`,
+    width: `${portalMesure.width}px`,
+    height: `${portalMesure.height}px`,
   };
 }
 
-export { computeTargetMeasure, computePortalMesure };
+export { getEmptyMeasure, computeTargetMeasure, computePortalMeasure, createPortalStyle };
