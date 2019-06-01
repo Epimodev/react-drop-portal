@@ -1,6 +1,6 @@
-import { createElement, Component, CSSProperties } from 'react';
+import { createElement, Component } from 'react';
 import { storiesOf } from '@storybook/react';
-import DropPortal from './DropPortal';
+import DropPortal from './index';
 import { PortalPosition, PortalAlignment } from './types';
 
 // classNames are defined in `.storybook/preview-head.html`

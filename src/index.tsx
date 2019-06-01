@@ -1,17 +1,29 @@
 import { createElement, Component, ReactElement, CSSProperties } from 'react';
 import AniPortal from 'react-aniportal';
-import { computeVerticalMeasure, computeLeftPosition, getScrollableParents } from './utils';
-
-interface ChildrenProps {
-  position: 'top' | 'bottom';
-}
+import {
+  getEmptyMeasure,
+  computeTargetMeasure,
+  computePortalMeasure,
+  createPortalStyle,
+} from './measure';
+import { getScrollableParents } from './utils';
+import {
+  PortalPosition,
+  PortalAlignment,
+  ContentMeasure,
+  PortalMeasure,
+  MeasurePortalOptions,
+} from './types';
 
 interface Props {
-  children: ((props: ChildrenProps) => ReactElement<any>) | ReactElement<any>;
+  children: ((props: PortalMeasure) => ReactElement<any>) | ReactElement<any>;
   target: HTMLElement;
-  position: 'top' | 'bottom';
-  alignment: 'left' | 'center' | 'right';
-  offset: { x: number; y: number };
+  position: PortalPosition;
+  alignment: PortalAlignment;
+  offsetX: number;
+  offsetY: number;
+  minWidth: number;
+  minHeight: number;
   className?: string;
   classNames?: {
     enter?: string;
@@ -28,70 +40,78 @@ interface Props {
   };
   timeout: number | { enter: number; exit: number };
   onClickOutside?: () => void;
+  onLeaveScreen?: () => void;
 }
 
-interface State {
-  childStyle?: CSSProperties;
-  childrenWidth: number;
-  childrenHeight: number;
-  position: 'top' | 'bottom';
-}
-
-class DropPortal extends Component<Props, State> {
+class DropPortal extends Component<Props, PortalMeasure> {
   childContainer: HTMLDivElement | null = null;
+  childSize: ContentMeasure = { width: 0, height: 0 };
   scrollableParents: HTMLElement[] = [];
 
   static defaultProps = {
     position: 'bottom',
-    alignment: 'center',
+    alignment: 'start',
+    offsetX: 0,
+    offsetY: 0,
+    minWidth: Infinity,
+    minHeight: Infinity,
     timeout: 0,
-    offset: { x: 0, y: 0 },
   };
 
   constructor(props: Props) {
     super(props);
 
     this.state = {
-      childrenWidth: 0,
-      childrenHeight: 0,
+      target: getEmptyMeasure(),
       position: props.position,
+      alignement: props.alignment,
+      top: 0,
+      left: 0,
+      width: 0,
+      height: 0,
     };
 
-    this.setChildContainer = this.setChildContainer.bind(this);
-    this.handleClick = this.handleClick.bind(this);
     this.portalDidUpdate = this.portalDidUpdate.bind(this);
-    this.updatePositionStyle = this.updatePositionStyle.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.setChildContainer = this.setChildContainer.bind(this);
+    this.updatePortalMeasure = this.updatePortalMeasure.bind(this);
   }
 
   componentDidMount() {
     // prevent click event just after componentDidMount
     // to avoid call `onClickOutside` when portal is open by a click on a button
     requestAnimationFrame(() => window.addEventListener('click', this.handleClick));
-    window.addEventListener('resize', this.updatePositionStyle);
+    window.addEventListener('resize', this.updatePortalMeasure);
 
     this.scrollableParents = getScrollableParents(this.props.target);
     this.scrollableParents.forEach(element => {
-      element.addEventListener('scroll', this.updatePositionStyle);
+      element.addEventListener('scroll', this.updatePortalMeasure);
     });
   }
 
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClick);
-    window.removeEventListener('resize', this.updatePositionStyle);
+    window.removeEventListener('resize', this.updatePortalMeasure);
 
     this.scrollableParents.forEach(element => {
       if (element) {
-        element.removeEventListener('scroll', this.updatePositionStyle);
+        element.removeEventListener('scroll', this.updatePortalMeasure);
       }
     });
     this.scrollableParents = [];
   }
 
-  setChildContainer(ref: HTMLDivElement | null) {
-    this.childContainer = ref;
-    // init position here instead of in `componentDidMount`
-    // because `componentDidMount` is call before portal finish render
-    this.updatePositionStyle();
+  isPortalSizeInit() {
+    return this.state.width > 0 && this.state.height > 0;
+  }
+
+  portalDidUpdate() {
+    const prevSize = this.childSize;
+    this.updateChildMeasure();
+
+    if (prevSize.width !== this.childSize.width || prevSize.height !== this.childSize.height) {
+      this.updatePortalMeasure();
+    }
   }
 
   handleClick(event: MouseEvent) {
@@ -104,91 +124,51 @@ class DropPortal extends Component<Props, State> {
     }
   }
 
-  portalDidUpdate() {
+  setChildContainer(ref: HTMLDivElement | null) {
+    this.childContainer = ref;
+    this.updateChildMeasure();
+    this.updatePortalMeasure();
+  }
+
+  updateChildMeasure() {
     if (this.childContainer) {
-      const { childrenWidth, childrenHeight } = this.state;
-      const newChildrenWidth = this.childContainer.offsetWidth;
-      const newChildrenHeight = this.childContainer.offsetHeight;
-      if (newChildrenWidth !== childrenWidth || newChildrenHeight !== childrenHeight) {
-        this.updatePositionStyle();
-      }
+      this.childSize = {
+        width: this.childContainer.offsetWidth,
+        height: this.childContainer.offsetHeight,
+      };
     }
   }
 
-  updatePositionStyle() {
-    if (this.childContainer === null) {
-      return;
-    }
-    const { position, alignment, target, offset, onClickOutside } = this.props;
-    const { top, left, height: targetHeight, width: targetWidth } = target.getBoundingClientRect();
-    const windowHeight = window.innerHeight;
-    const windowWidth = window.innerWidth;
-    const childrenWidth = this.childContainer.offsetWidth;
-    const childrenHeight = this.childContainer.offsetHeight;
-
-    const targetTop = top + window.scrollY;
-    const targetLeft = left + window.scrollX;
-
-    const verticalMeasure = computeVerticalMeasure({
+  updatePortalMeasure() {
+    const { target, position, alignment, offsetX, offsetY, minWidth, minHeight } = this.props;
+    const targetMeasure = computeTargetMeasure(target);
+    const options: MeasurePortalOptions = {
       position,
-      windowHeight,
-      childrenHeight,
-      targetHeight,
-      targetTop,
-      offset: offset.y,
-    });
-    const leftPosition = computeLeftPosition({
-      windowWidth,
-      childrenWidth,
-      targetWidth,
-      targetLeft,
       alignment,
-      offset: offset.x,
-    });
-
-    const measuredTop = verticalMeasure.top;
-    const measuredBottom = verticalMeasure.top + verticalMeasure.height;
-    const windowTop = window.scrollY;
-    const windowBottom = windowHeight + window.scrollY;
-    const isInScreen = measuredBottom > windowTop && measuredTop < windowBottom;
-
-    if (isInScreen) {
-      const style: CSSProperties = {
-        position: 'absolute',
-        top: `${verticalMeasure.top}px`,
-        left: `${leftPosition}px`,
-        height: `${verticalMeasure.height}px`,
-      };
-
-      this.setState({
-        childrenWidth,
-        childrenHeight,
-        childStyle: style,
-        position: verticalMeasure.position,
-      });
-    } else {
-      if (onClickOutside) {
-        onClickOutside();
-      }
-    }
+      offsetX,
+      offsetY,
+      minWidth,
+      minHeight,
+    };
+    const portalMeasure = computePortalMeasure(this.childSize, targetMeasure, options);
+    this.setState(portalMeasure);
   }
 
   render() {
     const { children, className, classNames, style, styles, timeout } = this.props;
-    const { childStyle, position } = this.state;
-    const portalStyle = { ...childStyle, ...style };
+    const portalStyle = this.isPortalSizeInit() ? createPortalStyle(this.state) : null;
 
     return (
       <AniPortal
         className={className}
         classNames={classNames}
-        style={portalStyle}
+        style={{ ...portalStyle, ...style }}
         styles={styles}
         timeout={timeout}
         portalDidUpdate={this.portalDidUpdate}
       >
         <div ref={this.setChildContainer}>
-          {typeof children === 'function' ? children({ position }) : children}
+          {typeof children === 'function' ? children(this.state) : children}
         </div>
       </AniPortal>
     );
