@@ -144,6 +144,64 @@ describe('computePortalMesure', () => {
       expect(result.top).toBe(expectedTop);
       expect(result.height).toBe(expectedHeight);
     });
+
+    test('should move down portal with offsetY', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'bottom',
+        offsetY: 50,
+      };
+
+      const expectedPosition = 'bottom';
+      const expectedTop = target.top + target.height + options.offsetY!;
+      const expectedHeight = content.height;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
+    });
+
+    test("should move up portal with offsetX if there isn\'t enough space", () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 400,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'bottom',
+        offsetY: 50,
+      };
+
+      const expectedPosition = 'top';
+      const expectedTop = target.top - content.height - options.offsetY!;
+      const expectedHeight = content.height;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
+    });
   });
 
   describe('position: top', () => {
@@ -281,6 +339,64 @@ describe('computePortalMesure', () => {
       const expectedPosition = 'top';
       const expectedTop = 0;
       const expectedHeight = target.top;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
+    });
+
+    test('should move up portal with offsetY', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 400,
+        left: 100,
+        right: 400,
+        bottom: 100,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        offsetY: 50,
+      };
+
+      const expectedPosition = 'top';
+      const expectedTop = target.top - content.height - options.offsetY!;
+      const expectedHeight = content.height;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.top).toBe(expectedTop);
+      expect(result.height).toBe(expectedHeight);
+    });
+
+    test("should move down portal with offsetX if there isn\'t enough space", () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'top',
+        offsetY: 50,
+      };
+
+      const expectedPosition = 'bottom';
+      const expectedTop = target.top + target.height + options.offsetY!;
+      const expectedHeight = content.height;
 
       const result = measure.computePortalMeasure(content, target, options);
 
@@ -432,6 +548,64 @@ describe('computePortalMesure', () => {
       expect(result.left).toBe(expectedLeft);
       expect(result.width).toBe(expectedWidth);
     });
+
+    test('should move left portal with offsetX', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 400,
+        right: 100,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'left',
+        offsetX: 50,
+      };
+
+      const expectedPosition = 'left';
+      const expectedLeft = target.left - content.width - options.offsetX!;
+      const expectedWidth = content.width;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
+    });
+
+    test("should move right portal with offsetX if there isn\'t enough space", () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'left',
+        offsetX: 50,
+      };
+
+      const expectedPosition = 'right';
+      const expectedLeft = target.left + target.width + options.offsetX!;
+      const expectedWidth = content.width;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
+    });
   });
 
   describe('position: right', () => {
@@ -569,6 +743,64 @@ describe('computePortalMesure', () => {
       const expectedPosition = 'right';
       const expectedLeft = target.left + target.width;
       const expectedWidth = target.right;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
+    });
+
+    test('should move right portal with offsetX', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 100,
+        right: 400,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        offsetX: 50,
+      };
+
+      const expectedPosition = 'right';
+      const expectedLeft = target.left + target.width + options.offsetX!;
+      const expectedWidth = content.width;
+
+      const result = measure.computePortalMeasure(content, target, options);
+
+      expect(result.position).toBe(expectedPosition);
+      expect(result.left).toBe(expectedLeft);
+      expect(result.width).toBe(expectedWidth);
+    });
+
+    test('should move left portal with offsetX if there isn\'t enough space', () => {
+      const content: ContentMeasure = {
+        width: 200,
+        height: 200,
+      };
+      const target: TargetMeasure = {
+        width: 400,
+        height: 60,
+        top: 100,
+        left: 400,
+        right: 100,
+        bottom: 400,
+      };
+      const options: MeasurePortalOptions = {
+        position: 'right',
+        offsetX: 50,
+      };
+
+      const expectedPosition = 'left';
+      const expectedLeft = target.left - content.width - options.offsetX!;
+      const expectedWidth = content.width;
 
       const result = measure.computePortalMeasure(content, target, options);
 

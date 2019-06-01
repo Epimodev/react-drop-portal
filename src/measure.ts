@@ -45,14 +45,18 @@ function computePortalVerticalMeasure(
   target: TargetMeasure,
   position: PortalPosition,
   alignement: PortalAlignment,
+  offsetX: number,
+  offsetY: number,
 ): { top: number; left: number; height: number } {
   const top =
-    position === 'bottom' ? target.top + target.height : Math.max(target.top - content.height, 0);
+    position === 'bottom'
+      ? target.top + target.height + offsetY
+      : Math.max(target.top - content.height - offsetY, 0);
   const height =
     position === 'bottom'
-      ? Math.min(target.bottom, content.height)
-      : Math.min(target.top, content.height);
-  const left = computeHorizontalAlign(content, target, alignement);
+      ? Math.min(target.bottom - offsetY, content.height)
+      : Math.min(target.top - offsetY, content.height);
+  const left = computeHorizontalAlign(content, target, alignement) + offsetX;
 
   return { top, height, left };
 }
@@ -62,14 +66,18 @@ function computePortalHorizontalMeasure(
   target: TargetMeasure,
   position: PortalPosition,
   alignement: PortalAlignment,
+  offsetX: number,
+  offsetY: number,
 ): { top: number; left: number; width: number } {
   const left =
-    position === 'right' ? target.left + target.width : Math.max(target.left - content.width, 0);
+    position === 'right'
+      ? target.left + target.width + offsetX
+      : Math.max(target.left - content.width - offsetX, 0);
   const width =
     position === 'right'
-      ? Math.min(target.right, content.width)
-      : Math.min(target.left, content.width);
-  const top = computeVerticalAlign(content, target, alignement);
+      ? Math.min(target.right - offsetX, content.width)
+      : Math.min(target.left - offsetX, content.width);
+  const top = computeVerticalAlign(content, target, alignement) + offsetY;
 
   return { top, width, left };
 }
@@ -159,10 +167,10 @@ function computePortalMeasure(
   const targetWithOffset: TargetMeasure = {
     width: target.width,
     height: target.height,
-    top: target.top + offsetY,
-    right: target.right - offsetX,
-    bottom: target.bottom - offsetY,
-    left: target.left + offsetX,
+    top: target.top - offsetY,
+    right: target.right + offsetX,
+    bottom: target.bottom + offsetY,
+    left: target.left - offsetX,
   };
 
   switch (position) {
@@ -177,9 +185,11 @@ function computePortalMeasure(
 
       const { top, left, height } = computePortalVerticalMeasure(
         content,
-        targetWithOffset,
+        target,
         portalPosition,
         alignement,
+        offsetX,
+        offsetY,
       );
 
       return {
@@ -204,9 +214,11 @@ function computePortalMeasure(
 
       const { top, left, height } = computePortalVerticalMeasure(
         content,
-        targetWithOffset,
+        target,
         portalPosition,
         alignement,
+        offsetX,
+        offsetY,
       );
 
       return {
@@ -231,9 +243,11 @@ function computePortalMeasure(
 
       const { top, left, width } = computePortalHorizontalMeasure(
         content,
-        targetWithOffset,
+        target,
         portalPosition,
         alignement,
+        offsetX,
+        offsetY,
       );
 
       return {
@@ -258,9 +272,11 @@ function computePortalMeasure(
 
       const { top, left, width } = computePortalHorizontalMeasure(
         content,
-        targetWithOffset,
+        target,
         portalPosition,
         alignement,
+        offsetX,
+        offsetY,
       );
 
       return {
