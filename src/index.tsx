@@ -6,7 +6,7 @@ import {
   computePortalMeasure,
   createPortalStyle,
 } from './measure';
-import { getScrollableParents } from './utils';
+import { getScrollableParents, deepEquals } from './utils';
 import {
   PortalPosition,
   PortalAlignment,
@@ -82,6 +82,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
     // to avoid call `onClickOutside` when portal is open by a click on a button
     requestAnimationFrame(() => window.addEventListener('click', this.handleClick));
     window.addEventListener('resize', this.updatePortalMeasure);
+    window.addEventListener('scroll', this.updatePortalMeasure);
 
     this.scrollableParents = getScrollableParents(this.props.target);
     this.scrollableParents.forEach(element => {
@@ -92,6 +93,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
   componentWillUnmount() {
     window.removeEventListener('click', this.handleClick);
     window.removeEventListener('resize', this.updatePortalMeasure);
+    window.removeEventListener('scroll', this.updatePortalMeasure);
 
     this.scrollableParents.forEach(element => {
       if (element) {
@@ -155,7 +157,13 @@ class DropPortal extends Component<Props, PortalMeasure> {
       minHeight,
     };
     const portalMeasure = computePortalMeasure(this.childSize, targetMeasure, options);
-    this.setState(portalMeasure);
+
+    this.setState(currentMeasure => {
+      if (deepEquals(currentMeasure, portalMeasure)) {
+        return null;
+      }
+      return portalMeasure;
+    });
   }
 
   render() {

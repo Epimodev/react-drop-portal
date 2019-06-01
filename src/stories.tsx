@@ -159,19 +159,6 @@ storiesOf('DropPortal/With long body', module).add('default', () => (
   </div>
 ));
 
-storiesOf('New version', module).add('test', () => (
-  <div style={{ height: 1000 }}>
-    <button
-      onClick={e => {
-        console.log(e.currentTarget.getBoundingClientRect());
-        console.log(window.scrollY);
-      }}
-    >
-      Click here
-    </button>
-  </div>
-));
-
 interface ExampleProps {
   buttonClassName: string;
   alignment: PortalAlignment;

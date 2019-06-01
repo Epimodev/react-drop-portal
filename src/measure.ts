@@ -20,8 +20,8 @@ function getEmptyMeasure(): TargetMeasure {
 }
 
 function computeTargetMeasure(target: HTMLElement): TargetMeasure {
-  const pageWidth = window.innerWidth;
-  const pageHeight = window.innerHeight;
+  const pageWidth = document.documentElement.scrollWidth;
+  const pageHeight = document.documentElement.scrollHeight;
   const scrollX = window.scrollX;
   const scrollY = window.scrollY;
   const targetRect = target.getBoundingClientRect();
