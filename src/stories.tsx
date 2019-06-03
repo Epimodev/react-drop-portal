@@ -159,6 +159,12 @@ storiesOf('DropPortal/With long body', module)
       <DropdownExample buttonClassName="button_outside-center" alignment="middle" />
     </div>
   ))
+  .add('at right', () => (
+    <div>
+      <div>Scroll down to see dropdown button</div>
+      <DropdownExample buttonClassName="button_outside-center" position="right" alignment="start" />
+    </div>
+  ))
   .add('can overflow', () => (
     <div>
       <div>Scroll down to see dropdown button</div>
