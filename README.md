@@ -47,7 +47,7 @@ class DropdownExample extends Component {
         {opened && (
             <DropPortal
               target={this.button}
-              alignment="left"
+              alignment="start"
             >
               <div>
                 <div>Choice 1</div>
@@ -69,14 +69,26 @@ class DropdownExample extends Component {
 **target** `HTMLElement`  
 Element which define portal position. For example, it can be an `input` for autocompletion or a `button` for a dropdown
 
-**position** `(optional) 'top' | 'bottom'`  
+**position** `(optional) 'top' | 'right' | 'bottom' | 'left'`  
 Default to 'bottom', define if portal element is above or below target
 
-**alignment** `(optional) 'left' | 'center' | 'right'`  
-Default to 'center', define how created portal element is aligned with target element
+**alignment** `(optional) 'start' | 'middle' | 'end'`  
+Default to 'start', define how created portal element is aligned with target element
 
-**offset** `(optional) { x: number, y: number }`  
-Add an offset on `x` and `y` axis for portal position
+**canOverflowScreen** `(optional) boolean`  
+Default to 'false', define if portal can overflow screen or not
+
+**offsetX** `(optional) number`  
+Add an offset on `x` axis for portal position
+
+**offsetY** `(optional) number`  
+Add an offset on `y` axis for portal position
+
+**minWidth** `(optional) number`  
+Default to `Infinity`, define the minimum width the portal can have when it overflow screen before place it to opposite position
+
+**minHeight** `(optional) number`  
+Default to `Infinity`, define the minimum height the portal can have when it overflow screen before place it to opposite position
 
 **className** `(optional) string`  
 className to apply on container
@@ -94,10 +106,31 @@ styles which are applied during mount and unmount of the component
 default to 0, duration of enter and exit animations
 
 **onClickOutside** `(optional) function (): void`  
-function called when user click outside portal or when portal become outside screen
+function called when user click outside portal
 
-**children** `ReactNode | function ({ position: 'top' | 'bottom' }): ReactNode`  
-Portal content. You can use a function if you need portal position relative to the target (can be usefull to render tooltip arrow in right orientation)
+**onLeaveScreen** `(optional) function (): void`  
+function called when portal become outside screen
+
+**children** `ReactNode | function (measures: PortalMeasure): ReactNode`  
+Portal content. You can use a function if you need portal position relative to the target (can be usefull to render tooltip arrow in right orientation)  
+`measures` contains:
+- top `number`
+- left `number`
+- width `number`
+- height `number`
+- position `'top' | 'right' | 'bottom' | 'left'`
+- alignement `'start' | 'middle' | 'end'`
+- target `object`
+  - width `number`
+  - height `number`
+  - top `number`
+  - right `number`
+  - bottom `number`
+  - left `number`
+  - windowTop `number`
+  - windowLeft `number`
+  - windowRight `number`
+  - windowBottom `number`
 
 example :
 ```jsx
