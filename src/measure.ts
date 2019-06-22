@@ -55,15 +55,19 @@ function computePortalVerticalMeasure(
   alignement: PortalAlignment,
   offsetX: number,
   offsetY: number,
+  canOverflowScreen: boolean,
 ): { top: number; left: number; height: number } {
+  const targetTop = canOverflowScreen ? target.top : target.windowTop;
+  const targetBottom = canOverflowScreen ? target.bottom : target.windowBottom;
+
   const top =
     position === 'bottom'
       ? target.top + target.height + offsetY
       : Math.max(target.top - content.height - offsetY, 0);
   const height =
     position === 'bottom'
-      ? Math.min(target.bottom - offsetY, content.height)
-      : Math.min(target.top - offsetY, content.height);
+      ? Math.min(targetBottom - offsetY, content.height)
+      : Math.min(targetTop - offsetY, content.height);
   const left = computeHorizontalAlign(content, target, alignement) + offsetX;
 
   return { top, height, left };
@@ -76,15 +80,19 @@ function computePortalHorizontalMeasure(
   alignement: PortalAlignment,
   offsetX: number,
   offsetY: number,
+  canOverflowScreen: boolean,
 ): { top: number; left: number; width: number } {
+  const targetLeft = canOverflowScreen ? target.left : target.windowLeft;
+  const targetRight = canOverflowScreen ? target.right : target.windowRight;
+
   const left =
     position === 'right'
       ? target.left + target.width + offsetX
       : Math.max(target.left - content.width - offsetX, 0);
   const width =
     position === 'right'
-      ? Math.min(target.right - offsetX, content.width)
-      : Math.min(target.left - offsetX, content.width);
+      ? Math.min(targetRight - offsetX, content.width)
+      : Math.min(targetLeft - offsetX, content.width);
   const top = computeVerticalAlign(content, target, alignement) + offsetY;
 
   return { top, width, left };
@@ -195,6 +203,7 @@ function computePortalMeasure(
         alignement,
         offsetX,
         offsetY,
+        canOverflowScreen,
       );
 
       return {
@@ -229,6 +238,7 @@ function computePortalMeasure(
         alignement,
         offsetX,
         offsetY,
+        canOverflowScreen,
       );
 
       return {
@@ -261,6 +271,7 @@ function computePortalMeasure(
         alignement,
         offsetX,
         offsetY,
+        canOverflowScreen,
       );
 
       return {
@@ -293,6 +304,7 @@ function computePortalMeasure(
         alignement,
         offsetX,
         offsetY,
+        canOverflowScreen,
       );
 
       return {
