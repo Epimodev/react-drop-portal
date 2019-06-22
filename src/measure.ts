@@ -42,7 +42,7 @@ function computeTargetMeasure(target: HTMLElement): TargetMeasure {
     windowTop: targetRect.top,
     windowLeft: targetRect.left,
     windowRight: window.innerWidth - targetRect.left - targetRect.width,
-    windowBottom: window.innerHeight - targetRect.bottom - targetRect.height,
+    windowBottom: window.innerHeight - targetRect.top - targetRect.height,
     width: targetRect.width,
     height: targetRect.height,
   };
