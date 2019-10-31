@@ -180,7 +180,9 @@ class DropPortal extends Component<Props, PortalMeasure> {
 
   render() {
     const { children, className, classNames, style, styles, timeout } = this.props;
-    const portalStyle = this.isPortalSizeInit() ? createPortalStyle(this.state) : null;
+    const portalStyle = this.isPortalSizeInit()
+      ? createPortalStyle(this.state)
+      : { display: 'inline-block' };
 
     return (
       <AniPortal

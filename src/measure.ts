@@ -321,8 +321,12 @@ function computePortalMeasure(
 }
 
 function createPortalStyle(portalMesure: PortalMeasure): CSSProperties {
+  // force border and padding reset to avoid infinite loop because they impact child size
   return {
     position: 'absolute',
+    display: 'inline-block',
+    border: 'none',
+    padding: 0,
     top: `${portalMesure.top}px`,
     left: `${portalMesure.left}px`,
     width: `${portalMesure.width}px`,
