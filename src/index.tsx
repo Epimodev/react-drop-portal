@@ -200,3 +200,4 @@ class DropPortal extends Component<Props, PortalMeasure> {
 }
 
 export default DropPortal;
+export { PortalPosition, PortalAlignment };
