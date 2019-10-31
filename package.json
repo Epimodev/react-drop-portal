@@ -25,7 +25,7 @@
     "check-format": "prettier --list-different 'src/**/*.ts?(x)'",
     "storybook": "start-storybook --ci -s ./ -p 9001 -c .storybook",
     "test": "jest",
-    "prepare": "yarn lint && yarn check-format && yarn test && yarn build"
+    "prepublish": "yarn lint && yarn check-format && yarn test && yarn build"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
