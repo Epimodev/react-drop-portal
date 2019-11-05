@@ -1,4 +1,4 @@
-import { createElement, Component } from 'react';
+import { createElement, useRef, useState } from 'react';
 import { storiesOf } from '@storybook/react';
 import DropPortal from './index';
 import { PortalPosition, PortalAlignment } from './types';
@@ -190,80 +190,67 @@ interface ExampleProps {
 const CHOICES_1 = ['Choice 1', 'Choice 2', 'Choice 3'];
 const CHOICES_2 = ['Choice 4', 'Choice 5'];
 
-class DropdownExample extends Component<ExampleProps, { opened: boolean; choices: string[] }> {
-  button: HTMLButtonElement | null = null;
-  constructor(props: ExampleProps) {
-    super(props);
-    this.state = { opened: false, choices: CHOICES_1 };
-    this.setButton = this.setButton.bind(this);
-    this.toogleDropdown = this.toogleDropdown.bind(this);
-    this.toogleChoices = this.toogleChoices.bind(this);
-  }
-  setButton(ref: HTMLButtonElement | null) {
-    this.button = ref;
-  }
-  toogleDropdown() {
-    this.setState(({ opened }) => ({
-      opened: !opened,
-    }));
-  }
-  toogleChoices() {
-    this.setState(({ choices }) => ({
-      choices: choices === CHOICES_1 ? CHOICES_2 : CHOICES_1,
-    }));
-  }
-  render() {
-    const {
-      buttonClassName,
-      alignment,
-      position = 'bottom',
-      canOverflowScreen,
-      offsetX,
-      offsetY,
-      withChildFunction = false,
-      withClickOutside = false,
-    } = this.props;
-    const { opened, choices } = this.state;
-    const buttonLabel = opened ? 'Close' : 'Open';
-    return (
-      <div>
-        <button ref={this.setButton} onClick={this.toogleDropdown} className={buttonClassName}>
-          {buttonLabel}
-        </button>
-        <button onClick={this.toogleChoices}>Change choices</button>
-        {opened && this.button && (
-          <DropPortal
-            target={this.button}
-            position={position}
-            alignment={alignment}
-            canOverflowScreen={canOverflowScreen}
-            offsetX={offsetX}
-            offsetY={offsetY}
-            className={dropdownClassName}
-            classNames={dropdownClassNames}
-            timeout={300}
-            onClickOutside={withClickOutside ? this.toogleDropdown : undefined}
-            onLeaveScreen={withClickOutside ? this.toogleDropdown : undefined}
-          >
-            {withChildFunction ? (
-              ({ position }) => (
-                <div>
-                  <div>{position}</div>
-                  {choices.map(choice => (
-                    <div key={choice}>{choice}</div>
-                  ))}
-                </div>
-              )
-            ) : (
+const DropdownExample: React.FC<ExampleProps> = ({
+  buttonClassName,
+  alignment,
+  position = 'bottom',
+  canOverflowScreen,
+  offsetX,
+  offsetY,
+  withChildFunction = false,
+  withClickOutside = false,
+}) => {
+  const buttonRef = useRef<HTMLButtonElement | null>(null);
+  const [opened, setOpened] = useState(false);
+  const [choices, setChoices] = useState(CHOICES_1);
+  const buttonLabel = opened ? 'Close' : 'Open';
+
+  const toogleDropdown = () => {
+    setOpened(o => !o);
+  };
+
+  const toogleChoices = () => {
+    setChoices(choices => (choices === CHOICES_1 ? CHOICES_2 : CHOICES_1));
+  };
+
+  return (
+    <div>
+      <button ref={buttonRef} onClick={toogleDropdown} className={buttonClassName}>
+        {buttonLabel}
+      </button>
+      <button onClick={toogleChoices}>Change choices</button>
+      {opened && buttonRef.current && (
+        <DropPortal
+          target={buttonRef.current}
+          position={position}
+          alignment={alignment}
+          canOverflowScreen={canOverflowScreen}
+          offsetX={offsetX}
+          offsetY={offsetY}
+          className={dropdownClassName}
+          classNames={dropdownClassNames}
+          timeout={300}
+          onClickOutside={withClickOutside ? toogleDropdown : undefined}
+          onLeaveScreen={withClickOutside ? toogleDropdown : undefined}
+        >
+          {withChildFunction ? (
+            ({ position }) => (
               <div>
+                <div>{position}</div>
                 {choices.map(choice => (
                   <div key={choice}>{choice}</div>
                 ))}
               </div>
-            )}
-          </DropPortal>
-        )}
-      </div>
-    );
-  }
-}
+            )
+          ) : (
+            <div>
+              {choices.map(choice => (
+                <div key={choice}>{choice}</div>
+              ))}
+            </div>
+          )}
+        </DropPortal>
+      )}
+    </div>
+  );
+};
