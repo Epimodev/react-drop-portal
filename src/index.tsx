@@ -110,12 +110,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
   }
 
   portalDidUpdate() {
-    const prevSize = this.childSize;
-    this.updateChildMeasure();
-
-    if (prevSize.width !== this.childSize.width || prevSize.height !== this.childSize.height) {
-      this.updatePortalMeasure();
-    }
+    this.updatePortalMeasure();
   }
 
   handleClick(event: MouseEvent) {
