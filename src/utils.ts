@@ -8,15 +8,23 @@ function getScrollableParents(target: HTMLElement, parents: HTMLElement[] = []):
   return parents;
 }
 
+function isEquals(value1: any, value2: any) {
+  const isObject = typeof value1 === 'object';
+  if (isObject) {
+    return deepEquals(value1, value2);
+  }
+  if (isNaN(value1)) {
+    return isNaN(value2);
+  }
+  return value1 === value2;
+}
+
 function deepEquals<T extends object>(value1: T, value2: T): boolean {
   const keys = Object.keys(value1);
   for (let i = 0, l = keys.length; i < l; i += 1) {
     const key = keys[i];
-    const isObject = typeof (value1 as any)[key] === 'object';
-    const keyEquals = isObject
-      ? deepEquals((value1 as any)[key], (value2 as any)[key])
-      : (value1 as any)[key] === (value2 as any)[key];
-    if (!keyEquals) {
+
+    if (!isEquals((value1 as any)[key], (value2 as any)[key])) {
       return false;
     }
   }
