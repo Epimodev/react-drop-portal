@@ -25,6 +25,7 @@ interface Props {
   offsetY: number;
   minWidth: number;
   minHeight: number;
+  withoutLocalFocus?: boolean;
   className?: string;
   classNames?: {
     enter?: string;
@@ -174,7 +175,15 @@ class DropPortal extends Component<Props, PortalMeasure> {
   }
 
   render() {
-    const { children, className, classNames, style, styles, timeout } = this.props;
+    const {
+      children,
+      withoutLocalFocus,
+      className,
+      classNames,
+      style,
+      styles,
+      timeout,
+    } = this.props;
     const portalStyle = this.isPortalSizeInit()
       ? createPortalStyle(this.state)
       : { display: 'inline-block' };
@@ -187,6 +196,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
         styles={styles}
         timeout={timeout}
         portalDidUpdate={this.portalDidUpdate}
+        withoutLocalFocus={withoutLocalFocus}
       >
         <div ref={this.setChildContainer}>
           {typeof children === 'function' ? children(this.state) : children}

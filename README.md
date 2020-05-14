@@ -90,6 +90,9 @@ Default to `Infinity`, define the minimum width the portal can have when it over
 **minHeight** `(optional) number`  
 Default to `Infinity`, define the minimum height the portal can have when it overflow screen before place it to opposite position
 
+**withoutLocalFocus** `(optional): boolean`  
+by default focus will be restricted to elements in portal you can disable this behavior by using this prop
+
 **className** `(optional) string`  
 className to apply on container
 
