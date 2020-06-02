@@ -1,6 +1,6 @@
 {
   "name": "react-drop-portal",
-  "version": "1.0.0-beta.9",
+  "version": "1.0.0-beta.10",
   "description": "A react component which render a portal located near a target element",
   "author": "Frederic Godin",
   "repository": "Epimodev/react-drop-portal",
@@ -56,7 +56,7 @@
     }
   },
   "dependencies": {
-    "react-aniportal": "^0.2.0",
+    "react-aniportal": "^0.2.1",
     "tslib": "^1.10.0"
   },
   "jest": {
