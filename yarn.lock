@@ -9070,10 +9070,10 @@ rc@^1.1.7, rc@^1.2.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-aniportal@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.2.1.tgz#874ba7da1907de0571ae3a5ebd0834e6b1d6ffb1"
-  integrity sha512-gvaDEuERG4UuCQnUUQuQVIsTtZBAd/y+6ACSJytG6H5njWQEXW1NQ7g2csBttj+FGD380KS8gKpkZpG0qK+jKA==
+react-aniportal@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/react-aniportal/-/react-aniportal-0.2.2.tgz#96de52071159bef1edb178792a11cb7fa526b943"
+  integrity sha512-QJ/bRtHNMCkqw9BGlwweGH3nBs+J7KnvG6qfxkRa74mtKHmxQQh9SlQNHEqPrVR6jcN97UWMI7Hkp54OJ54VcA==
   dependencies:
     classnames "^2.2.6"
     tslib "^1.10.0"

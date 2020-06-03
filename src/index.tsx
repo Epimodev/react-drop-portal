@@ -5,6 +5,7 @@ import {
   computeTargetMeasure,
   computePortalMeasure,
   createPortalStyle,
+  createInitialStyle,
 } from './measure';
 import { getScrollableParents, deepEquals } from './utils';
 import {
@@ -177,6 +178,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
   render() {
     const {
       children,
+      target,
       withoutLocalFocus,
       className,
       classNames,
@@ -186,7 +188,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
     } = this.props;
     const portalStyle = this.isPortalSizeInit()
       ? createPortalStyle(this.state)
-      : { display: 'inline-block' };
+      : createInitialStyle(target);
 
     return (
       <AniPortal

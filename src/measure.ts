@@ -334,4 +334,30 @@ function createPortalStyle(portalMesure: PortalMeasure): CSSProperties {
   };
 }
 
-export { getEmptyMeasure, computeTargetMeasure, computePortalMeasure, createPortalStyle };
+/**
+ * @name createInitialStyle
+ * @desc compute style to apply before first portal render
+ * which is require to get child measure and compute portal position
+ *
+ * @param target - portal target
+ */
+function createInitialStyle(target: HTMLElement): CSSProperties {
+  const measure = computeTargetMeasure(target);
+  // force border and padding reset to avoid infinite loop because they impact child size
+  return {
+    position: 'absolute',
+    display: 'inline-block',
+    border: 'none',
+    padding: 0,
+    top: `${measure.top}px`,
+    left: `${measure.left}px`,
+  };
+}
+
+export {
+  getEmptyMeasure,
+  computeTargetMeasure,
+  computePortalMeasure,
+  createPortalStyle,
+  createInitialStyle,
+};
