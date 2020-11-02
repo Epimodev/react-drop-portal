@@ -78,6 +78,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
     this.portalDidUpdate = this.portalDidUpdate.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.setChildContainer = this.setChildContainer.bind(this);
+    this.updateChildMeasure = this.updateChildMeasure.bind(this);
     this.updatePortalMeasure = this.updatePortalMeasure.bind(this);
   }
 
@@ -112,6 +113,7 @@ class DropPortal extends Component<Props, PortalMeasure> {
   }
 
   portalDidUpdate() {
+    this.updateChildMeasure();
     this.updatePortalMeasure();
   }
 
